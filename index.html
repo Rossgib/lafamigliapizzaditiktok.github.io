@@ -239,6 +239,32 @@
             font-weight: bold;
             margin-top: 10px;
         }
+
+        /* Modal styles */
+        .modal-content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #000;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
@@ -277,124 +303,237 @@
                     <a href="#classiche">Classiche</a>
                     <a href="#gourmet">Gourmet</a>
                     <a href="#vegane">Vegane</a>
-                    <a href="#" onclick="openModal('shareRecipe')">Condividi una ricetta</a>
-                    <a href="#" onclick="openModal('requestRecipe')">Richiedi una ricetta</a>
                 </div>
             </li>
             <li>
                 <a href="#calcolatore">Calcolatore</a>
-                <div class="submenu">
-                    <a href="#idratazione">Idratazione</a>
-                    <a href="#lievito">Lievito</a>
-                    <a href="#tempi">Tempi di lievitazione</a>
-                </div>
             </li>
             <li>
-                <a href="#ricettari">Ricettari</a>
+                <a href="#contattaci">Contattaci</a>
                 <div class="submenu">
-                    <a href="#stagionali">Stagionali</a>
-                    <a href="#regionali">Regionali</a>
-                    <a href="#internazionali">Internazionali</a>
-                    <a href="#" onclick="openModal('shareRicettario')">Condividi un ricettario</a>
-                    <a href="#" onclick="openModal('browseRicettari')">Sfoglia ricettari</a>
+                    <a href="#" onclick="openModal('login')">Accedi</a>
+                    <a href="#" onclick="openModal('register')">Registrati</a>
                 </div>
             </li>
-            <li><a href="#" id="authBtn">Iscriviti/Accedi</a></li>
         </ul>
     </nav>
 
     <div class="container">
         <div class="main-content">
-            <div id="calcolatore" class="section">
-                <h2>Calcolatore di Ingredienti</h2>
+            <section id="preparazione" class="section">
+                <h2>Preparazione</h2>
+                <p>La preparazione della pizza è un'arte che richiede pazienza e precisione...</p>
+            </section>
+
+            <section id="consigli" class="section">
+                <h2>Consigli</h2>
+                <p>Ecco alcuni consigli per migliorare la tua pizza...</p>
+            </section>
+
+            <section id="ricette" class="section">
+                <h2>Ricette</h2>
+                <p>Scopri le nostre ricette di pizza, dalle classiche alle gourmet...</p>
+            </section>
+
+            <section id="calcolatore" class="section">
+                <h2>Calcolatore degli Ingredienti</h2>
                 <div id="calculator">
-                    <h3>Personalizza la tua pizza</h3>
-                    <select id="pizzaType">
-                        <option value="napoletana">Pizza Napoletana</option>
-                        <option value="teglia">Pizza in Teglia</option>
-                        <option value="pala">Pizza alla Pala</option>
-                    </select>
-                    <select id="yeastType">
-                        <option value="fresh">Lievito Fresco</option>
-                        <option value="dry">Lievito Secco</option>
-                        <option value="mother">Lievito Madre</option>
-                    </select>
-                    <input type="number" id="portions" placeholder="Numero di porzioni">
-                    <input type="number" id="hydration" placeholder="Percentuale di idratazione (es. 65)">
-                    <input type="number" id="leavenTime" placeholder="Tempo di lievitazione (ore)">
-                    <button onclick="calculateIngredients()">Calcola Ingredienti</button>
+                    <h3>Calcolatore della Pizza</h3>
+                    <form id="pizzaForm">
+                        <label for="pizzaType">Tipo di Pizza:</label>
+                        <select id="pizzaType" name="pizzaType">
+                            <option value="margherita">Margherita</option>
+                            <option value="pepperoni">Pepperoni</option>
+                            <option value="vegetariana">Vegetariana</option>
+                        </select>
+
+                        <label for="numPizzas">Numero di Pizze:</label>
+                        <input type="number" id="numPizzas" name="numPizzas" min="1" max="10" value="1">
+
+                        <button type="button" onclick="calculateIngredients()">Calcola Ingredienti</button>
+                    </form>
+
                     <div id="result"></div>
                 </div>
-            </div>
+            </section>
 
-            <div id="auth" class="section" style="display:none;">
-                <h2>Iscriviti o Accedi</h2>
-                <div class="auth-form">
-                    <input type="text" id="username" placeholder="Nome utente">
-                    <input type="email" id="email" placeholder="Email">
-                    <input type="password" id="password" placeholder="Password">
-                    <button onclick="register()">Iscriviti</button>
-                    <button onclick="login()">Accedi</button>
+            <section id="contattaci" class="section">
+                <h2>Contattaci</h2>
+                <p>Per qualsiasi domanda, non esitare a contattarci tramite il modulo sottostante...</p>
+                <div id="visitor-counter">Numero di visitatori: <span id="visitorCount">0</span></div>
+                <div id="quote-box">
+                    <p>"La pizza è l'arte della felicità." <span class="author">- Autore sconosciuto</span></p>
                 </div>
-            </div>
+            </section>
         </div>
+        
+        <aside class="sidebar">
+            <h3>Utente Autenticato</h3>
+            <div class="auth-form">
+                <input type="text" id="username" placeholder="Nome Utente">
+                <input type="password" id="password" placeholder="Password">
+                <button onclick="login()">Accedi</button>
+            </div>
+        </aside>
+    </div>
 
-        <div class="sidebar">
-            <div id="visitor-counter">
-                Visitatori: <span id="visitorCount">1</span>
-            </div>
-            <div id="quote-box">
-                <p id="quote">"La vita è una combinazione di magia e pizza."</p>
-                <p class="author">- Federico Fellini</p>
-            </div>
+    <!-- Modal structure -->
+    <div id="askQuestion" class="modal-content" style="display:none;">
+        <span class="close" onclick="closeModal('askQuestion')">&times;</span>
+        <div class="modal-body">
+            <h3>Fai una domanda</h3>
+            <textarea id="question" rows="5" placeholder="Scrivi qui la tua domanda..."></textarea>
+            <button onclick="submitQuestion()">Invia</button>
+        </div>
+    </div>
+
+    <div id="shareExperience" class="modal-content" style="display:none;">
+        <span class="close" onclick="closeModal('shareExperience')">&times;</span>
+        <div class="modal-body">
+            <h3>Condividi la tua esperienza</h3>
+            <textarea id="experience" rows="5" placeholder="Condividi la tua esperienza..."></textarea>
+            <button onclick="submitExperience()">Invia</button>
+        </div>
+    </div>
+
+    <div id="askAdvice" class="modal-content" style="display:none;">
+        <span class="close" onclick="closeModal('askAdvice')">&times;</span>
+        <div class="modal-body">
+            <h3>Chiedi un consiglio</h3>
+            <textarea id="advice" rows="5" placeholder="Scrivi qui la tua richiesta di consiglio..."></textarea>
+            <button onclick="submitAdvice()">Invia</button>
+        </div>
+    </div>
+
+    <div id="shareTip" class="modal-content" style="display:none;">
+        <span class="close" onclick="closeModal('shareTip')">&times;</span>
+        <div class="modal-body">
+            <h3>Condividi un suggerimento</h3>
+            <textarea id="tip" rows="5" placeholder="Scrivi qui il tuo suggerimento..."></textarea>
+            <button onclick="submitTip()">Invia</button>
+        </div>
+    </div>
+
+    <div id="login" class="modal-content" style="display:none;">
+        <span class="close" onclick="closeModal('login')">&times;</span>
+        <div class="modal-body">
+            <h3>Accedi</h3>
+            <input type="text" id="loginUsername" placeholder="Nome Utente">
+            <input type="password" id="loginPassword" placeholder="Password">
+            <button onclick="performLogin()">Accedi</button>
+        </div>
+    </div>
+
+    <div id="register" class="modal-content" style="display:none;">
+        <span class="close" onclick="closeModal('register')">&times;</span>
+        <div class="modal-body">
+            <h3>Registrati</h3>
+            <input type="text" id="registerUsername" placeholder="Nome Utente">
+            <input type="password" id="registerPassword" placeholder="Password">
+            <button onclick="performRegister()">Registrati</button>
         </div>
     </div>
 
     <script>
-        let visitorCount = 1;
+        function calculateIngredients() {
+            const pizzaType = document.getElementById('pizzaType').value;
+            const numPizzas = document.getElementById('numPizzas').value;
+            let result = '';
 
-        document.getElementById('authBtn').addEventListener('click', function() {
-            var authSection = document.getElementById('auth');
-            authSection.style.display = authSection.style.display === 'none' ? 'block' : 'none';
-        });
+            switch (pizzaType) {
+                case 'margherita':
+                    result = \`Per \${numPizzas} pizza(e) Margherita, hai bisogno di:
+                              - \${numPizzas * 100}g di farina
+                              - \${numPizzas * 60}ml di acqua
+                              - \${numPizzas * 10}g di lievito
+                              - \${numPizzas * 50}g di mozzarella
+                              - \${numPizzas * 50}g di pomodoro\`;
+                    break;
+                case 'pepperoni':
+                    result = \`Per \${numPizzas} pizza(e) Pepperoni, hai bisogno di:
+                              - \${numPizzas * 100}g di farina
+                              - \${numPizzas * 60}ml di acqua
+                              - \${numPizzas * 10}g di lievito
+                              - \${numPizzas * 50}g di mozzarella
+                              - \${numPizzas * 50}g di pomodoro
+                              - \${numPizzas * 30}g di pepperoni\`;
+                    break;
+                case 'vegetariana':
+                    result = \`Per \${numPizzas} pizza(e) Vegetariana, hai bisogno di:
+                              - \${numPizzas * 100}g di farina
+                              - \${numPizzas * 60}ml di acqua
+                              - \${numPizzas * 10}g di lievito
+                              - \${numPizzas * 50}g di mozzarella
+                              - \${numPizzas * 50}g di pomodoro
+                              - Verdure miste\`;
+                    break;
+                default:
+                    result = 'Seleziona un tipo di pizza valido.';
+            }
 
-        function register() {
-            var username = document.getElementById('username').value;
-            var email = document.getElementById('email').value;
-            var password = document.getElementById('password').value;
-            console.log('Registrazione:', username, email, password);
-            // Implementa la logica di registrazione
+            document.getElementById('result').innerText = result;
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
         }
 
         function login() {
-            var email = document.getElementById('email').value;
-            var password = document.getElementById('password').value;
-            console.log('Login:', email, password);
-            // Implementa la logica di login
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            alert('Login effettuato con successo!'); // Simulazione login
         }
 
-        function openModal(modalType) {
-            console.log('Apertura modale:', modalType);
-            // Implementa la logica per aprire i vari modali
+        function submitQuestion() {
+            const question = document.getElementById('question').value;
+            alert('Domanda inviata con successo!'); // Simulazione invio domanda
+            closeModal('askQuestion');
         }
 
-        function calculateIngredients() {
-            const pizzaType = document.getElementById('pizzaType').value;
-            const yeastType = document.getElementById('yeastType').value;
-            const portions = parseInt(document.getElementById('portions').value);
-            const hydration = parseInt(document.getElementById('hydration').value);
-            const leavenTime = parseInt(document.getElementById('leavenTime').value);
+        function submitExperience() {
+            const experience = document.getElementById('experience').value;
+            alert('Esperienza condivisa con successo!'); // Simulazione invio esperienza
+            closeModal('shareExperience');
+        }
 
-            // Calcoli base
-            let flour = portions * 250; // 250g di farina per porzione
-            let water = (flour * hydration) / 100;
-            let salt = flour * 0.03; // 3% del peso della farina
-            let yeast;
+        function submitAdvice() {
+            const advice = document.getElementById('advice').value;
+            alert('Consiglio inviato con successo!'); // Simulazione invio consiglio
+            closeModal('askAdvice');
+        }
 
-            // Calcolo del lievito in base al tipo e al tempo di lievitazione
-            if (yeastType === 'fresh') {
-                yeast = (flour * 0.02) * (24 / leavenTime); // 2% per 24 ore, aggiustato per il tempo di lievitazione
-            } else if (yeastType === 'dry') {
-                yeast = (flour * 0.005) * (24 / leavenTime); // 0.5% per 24 ore, aggiustato per il tempo di lievitazione
-            } else if (yeastType === 'mother') {
-                yeast = (flour *
+        function submitTip() {
+            const tip = document.getElementById('tip').value;
+            alert('Suggerimento condiviso con successo!'); // Simulazione invio suggerimento
+            closeModal('shareTip');
+        }
+
+        function performLogin() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            alert('Accesso effettuato con successo!'); // Simulazione accesso
+            closeModal('login');
+        }
+
+        function performRegister() {
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+            alert('Registrazione effettuata con successo!'); // Simulazione registrazione
+            closeModal('register');
+        }
+
+        // Simulazione contatore visitatori
+        let visitorCount = 0;
+        setInterval(() => {
+            visitorCount++;
+            document.getElementById('visitorCount').innerText = visitorCount;
+        }, 5000); // Incrementa il contatore ogni 5 secondi
+    </script>
+</body>
+</html>
+
+
