@@ -300,9 +300,9 @@
             <li>
                 <a href="#ricette">Ricette</a>
                 <div class="submenu">
-                    <a href="#classiche">Classiche</a>
-                    <a href="#gourmet">Gourmet</a>
-                    <a href="#vegane">Vegane</a>
+                    <a href="#margherita">Margherita</a>
+                    <a href="#pepperoni">Pepperoni</a>
+                    <a href="#vegetariana">Vegetariana</a>
                 </div>
             </li>
             <li>
@@ -323,16 +323,52 @@
             <section id="preparazione" class="section">
                 <h2>Preparazione</h2>
                 <p>La preparazione della pizza è un'arte che richiede pazienza e precisione...</p>
+                <div id="impasto">
+                    <h3>Impasto</h3>
+                    <p>Il segreto di una buona pizza sta nell'impasto...</p>
+                </div>
+                <div id="lievitazione">
+                    <h3>Lievitazione</h3>
+                    <p>La lievitazione è un processo cruciale per ottenere una pizza soffice...</p>
+                </div>
+                <div id="cottura">
+                    <h3>Cottura</h3>
+                    <p>La cottura deve essere fatta ad alte temperature...</p>
+                </div>
             </section>
 
             <section id="consigli" class="section">
                 <h2>Consigli</h2>
                 <p>Ecco alcuni consigli per migliorare la tua pizza...</p>
+                <div id="farina">
+                    <h3>Scelta della Farina</h3>
+                    <p>La farina giusta fa la differenza...</p>
+                </div>
+                <div id="temperature">
+                    <h3>Temperature</h3>
+                    <p>Le temperature giuste per ogni fase della preparazione...</p>
+                </div>
+                <div id="ingredienti">
+                    <h3>Ingredienti</h3>
+                    <p>Ingredienti di qualità sono fondamentali...</p>
+                </div>
             </section>
 
             <section id="ricette" class="section">
                 <h2>Ricette</h2>
                 <p>Scopri le nostre ricette di pizza, dalle classiche alle gourmet...</p>
+                <div id="margherita">
+                    <h3>Margherita</h3>
+                    <p>Ingredienti e preparazione della classica pizza Margherita...</p>
+                </div>
+                <div id="pepperoni">
+                    <h3>Pepperoni</h3>
+                    <p>Ingredienti e preparazione della pizza Pepperoni...</p>
+                </div>
+                <div id="vegetariana">
+                    <h3>Vegetariana</h3>
+                    <p>Ingredienti e preparazione della pizza Vegetariana...</p>
+                </div>
             </section>
 
             <section id="calcolatore" class="section">
@@ -345,10 +381,19 @@
                             <option value="margherita">Margherita</option>
                             <option value="pepperoni">Pepperoni</option>
                             <option value="vegetariana">Vegetariana</option>
+                            <option value="verace">Verace</option>
+                            <option value="teglia">Teglia</option>
+                            <option value="pala">Pala</option>
+                            <option value="calzone">Calzone Ripieno</option>
+                            <option value="panuozzo">Panuozzo</option>
+                            <option value="fritta">Pizza Fritta</option>
                         </select>
 
                         <label for="numPizzas">Numero di Pizze:</label>
                         <input type="number" id="numPizzas" name="numPizzas" min="1" max="10" value="1">
+
+                        <label for="hydration">Percentuale di Idratazione (%):</label>
+                        <input type="number" id="hydration" name="hydration" min="50" max="100" value="60">
 
                         <button type="button" onclick="calculateIngredients()">Calcola Ingredienti</button>
                     </form>
@@ -438,40 +483,44 @@
         function calculateIngredients() {
             const pizzaType = document.getElementById('pizzaType').value;
             const numPizzas = document.getElementById('numPizzas').value;
+            const hydration = document.getElementById('hydration').value;
             let result = '';
 
+            let flour = numPizzas * 100;
+            let water = (hydration / 100) * flour;
+            let yeast = numPizzas * 10;
+            let salt = numPizzas * 5;
+            let oil = numPizzas * 10;
+
             switch (pizzaType) {
-                case 'margherita':
-                    result = \`Per \${numPizzas} pizza(e) Margherita, hai bisogno di:
-                              - \${numPizzas * 100}g di farina
-                              - \${numPizzas * 60}ml di acqua
-                              - \${numPizzas * 10}g di lievito
-                              - \${numPizzas * 50}g di mozzarella
-                              - \${numPizzas * 50}g di pomodoro\`;
+                case 'verace':
+                    yeast *= 0.5;
+                    oil *= 0.5;
                     break;
-                case 'pepperoni':
-                    result = \`Per \${numPizzas} pizza(e) Pepperoni, hai bisogno di:
-                              - \${numPizzas * 100}g di farina
-                              - \${numPizzas * 60}ml di acqua
-                              - \${numPizzas * 10}g di lievito
-                              - \${numPizzas * 50}g di mozzarella
-                              - \${numPizzas * 50}g di pomodoro
-                              - \${numPizzas * 30}g di pepperoni\`;
+                case 'teglia':
+                    water *= 1.1;
                     break;
-                case 'vegetariana':
-                    result = \`Per \${numPizzas} pizza(e) Vegetariana, hai bisogno di:
-                              - \${numPizzas * 100}g di farina
-                              - \${numPizzas * 60}ml di acqua
-                              - \${numPizzas * 10}g di lievito
-                              - \${numPizzas * 50}g di mozzarella
-                              - \${numPizzas * 50}g di pomodoro
-                              - Verdure miste\`;
+                case 'pala':
+                    water *= 1.2;
                     break;
-                default:
-                    result = 'Seleziona un tipo di pizza valido.';
+                case 'calzone':
+                    flour *= 1.2;
+                    break;
+                case 'panuozzo':
+                    flour *= 0.8;
+                    break;
+                case 'fritta':
+                    oil *= 1.5;
+                    break;
             }
 
-            document.getElementById('result').innerText = result;
+            result += `<p>Farina: ${flour.toFixed(2)} g</p>`;
+            result += `<p>Acqua: ${water.toFixed(2)} ml</p>`;
+            result += `<p>Lievito: ${yeast.toFixed(2)} g</p>`;
+            result += `<p>Sale: ${salt.toFixed(2)} g</p>`;
+            result += `<p>Olio: ${oil.toFixed(2)} ml</p>`;
+
+            document.getElementById('result').innerHTML = result;
         }
 
         function openModal(modalId) {
@@ -480,12 +529,6 @@
 
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
-        }
-
-        function login() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            alert('Login effettuato con successo!'); // Simulazione login
         }
 
         function submitQuestion() {
@@ -535,5 +578,3 @@
     </script>
 </body>
 </html>
-
-
