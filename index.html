@@ -92,7 +92,6 @@
 
         nav ul li {
             margin: 0 15px;
-            position: relative;
         }
 
         nav ul li a {
@@ -104,31 +103,6 @@
 
         nav ul li a:hover {
             color: var(--primary-color);
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
-
-        nav ul li:hover .dropdown-content {
-            display: block;
         }
 
         .section {
@@ -243,38 +217,6 @@
             background-color: #f9f9f9;
             border-left: 3px solid var(--secondary-color);
         }
-
-        .user-content {
-            background-color: #f9f9f9;
-            border-left: 3px solid var(--primary-color);
-            padding: 10px;
-            margin-bottom: 15px;
-        }
-
-        .user-content .author {
-            font-weight: bold;
-            color: var(--secondary-color);
-        }
-
-        .user-content .date {
-            font-size: 0.8em;
-            color: #888;
-        }
-
-        #user-profile {
-            background-color: #FFF;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-
-        #user-profile img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
     </style>
 </head>
 <body>
@@ -287,45 +229,17 @@
     
     <nav>
         <ul>
-            <li>
-                <a href="#preparazione">Preparazione</a>
-                <div class="dropdown-content">
-                    <a href="#" onclick="openModal('sharePreparation')">Condividi Tecnica</a>
-                    <a href="#" onclick="openModal('askPreparation')">Chiedi Consiglio</a>
-                </div>
-            </li>
-            <li>
-                <a href="#consigli">Consigli</a>
-                <div class="dropdown-content">
-                    <a href="#" onclick="openModal('shareTip')">Condividi Consiglio</a>
-                    <a href="#" onclick="openModal('askTip')">Chiedi Consiglio</a>
-                </div>
-            </li>
-            <li>
-                <a href="#ricette">Ricette</a>
-                <div class="dropdown-content">
-                    <a href="#" onclick="openModal('shareRecipe')">Condividi Ricetta</a>
-                    <a href="#" onclick="openModal('askRecipe')">Chiedi Ricetta</a>
-                </div>
-            </li>
+            <li><a href="#preparazione">Preparazione</a></li>
+            <li><a href="#consigli">Consigli</a></li>
+            <li><a href="#ricette">Ricette</a></li>
             <li><a href="#calcolatore">Calcolatore</a></li>
-            <li>
-                <a href="#ricettari">Ricettari</a>
-                <div class="dropdown-content">
-                    <a href="#" onclick="openModal('shareRicettario')">Condividi Ricettario</a>
-                    <a href="#" onclick="openModal('askRicettario')">Chiedi Ricettario</a>
-                </div>
-            </li>
-            <li><a href="#" id="loginBtn">Accedi/Registrati</a></li>
+            <li><a href="#ricettari">Ricettari</a></li>
+            <li><a href="#" id="registerBtn">Iscriviti</a></li>
         </ul>
     </nav>
 
     <div class="container">
         <div class="main-content">
-            <div id="user-profile" style="display: none;">
-                <!-- Il profilo utente verrà popolato dinamicamente qui -->
-            </div>
-
             <div id="preparazione" class="section">
                 <h2>Preparazione della Pizza</h2>
                 <p>La preparazione della pizza perfetta richiede attenzione ai dettagli. Ecco i passaggi fondamentali:</p>
@@ -339,9 +253,7 @@
                     <li>Inforna la pizza nella parte più bassa del forno</li>
                     <li>Negli ultimi 1-2 minuti, sposta la pizza sotto il grill per una perfetta doratura</li>
                 </ol>
-                <div id="user-preparations">
-                    <!-- Le preparazioni condivise dagli utenti verranno aggiunte qui dinamicamente -->
-                </div>
+                <button onclick="openModal('askQuestion')">Fai una domanda sulla preparazione</button>
             </div>
             
             <div id="consigli" class="section">
@@ -352,9 +264,7 @@
                     <li>Non esagerare con gli ingredienti: in pizza, less is more!</li>
                     <li>Preriscalda il forno con la pietra refrattaria per una cottura perfetta</li>
                 </ul>
-                <div id="user-tips">
-                    <!-- I consigli condivisi dagli utenti verranno aggiunti qui dinamicamente -->
-                </div>
+                <button onclick="openModal('askQuestion')">Chiedi un consiglio</button>
             </div>
             
             <div id="ricette" class="section">
@@ -371,9 +281,7 @@
                     <li>Basilico fresco</li>
                     <li>Olio extravergine d'oliva</li>
                 </ul>
-                <div id="user-recipes">
-                    <!-- Le ricette condivise dagli utenti verranno aggiunte qui dinamicamente -->
-                </div>
+                <button onclick="openModal('shareRecipe')">Condividi la tua ricetta</button>
             </div>
             
             <div id="calcolatore" class="section">
@@ -398,11 +306,85 @@
 
             <div id="ricettari" class="section">
                 <h2>Ricettari</h2>
-                <p>Scopri e condividi ricettari completi dedicati alla pizza:</p>
-                <div id="user-ricettari">
-                    <!-- I ricettari condivisi dagli utenti verranno aggiunti qui dinamicamente -->
-                </div>
+                <p>Condividi e scopri ricettari completi dedicati alla pizza:</p>
+                <ul id="ricettariList">
+                    <!-- I ricettari verranno aggiunti dinamicamente qui -->
+                </ul>
+                <button onclick="openModal('shareRicettario')">Condividi il tuo ricettario</button>
             </div>
         </div>
 
-        <div class="sidebar
+        <div class="sidebar">
+            <h3>Citazioni sulla Pizza</h3>
+            <div id="citazioni">
+                <div class="citation">"La vita è una combinazione magica di ingredienti perfetti, proprio come una pizza." - Anonimo</div>
+                <div class="citation">"Non c'è amore più sincero dell'amore per la pizza." - George Bernard Shaw</div>
+                <!-- Altre citazioni verranno aggiunte dinamicamente qui -->
+            </div>
+            <button onclick="openModal('shareCitation')">Condividi una citazione</button>
+            <div id="visitor-counter">
+                Visitatori: <span id="visitorCount">1</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal per la registrazione -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Registrati</h2>
+            <form id="registerForm">
+                <input type="text" placeholder="Nome" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Registrati</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal per fare domande -->
+    <div id="questionModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Fai una domanda</h2>
+            <form id="questionForm">
+                <textarea placeholder="La tua domanda" required></textarea>
+                <button type="submit">Invia domanda</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal per condividere ricette -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Condividi la tua ricetta</h2>
+            <form id="recipeForm">
+                <input type="text" placeholder="Nome della ricetta" required>
+                <textarea placeholder="Ingredienti" required></textarea>
+                <textarea placeholder="Procedimento" required></textarea>
+                <button type="submit">Condividi ricetta</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal per condividere citazioni -->
+    <div id="citationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Condividi una citazione</h2>
+            <form id="citationForm">
+                <textarea placeholder="La tua citazione" required></textarea>
+                <input type="text" placeholder="Autore (opzionale)">
+                <button type="submit">Condividi citazione</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal per condividere ricettari -->
+    <div id="ricettarioModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Condividi il tuo ricettario</h2>
+            <form id="ricettarioForm">
+                <input type="text" placeholder="Titolo del ricett
