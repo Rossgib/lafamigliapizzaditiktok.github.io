@@ -25,10 +25,24 @@
         }
 
         .container {
+            display: flex;
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+        }
+
+        .main-content {
+            flex: 3;
+            margin-right: 20px;
+        }
+
+        .sidebar {
+            flex: 1;
+            background-color: #FFF;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
         }
 
         header {
@@ -77,7 +91,6 @@
         }
 
         nav ul li {
-            position: relative;
             margin: 0 15px;
         }
 
@@ -90,30 +103,6 @@
 
         nav ul li a:hover {
             color: var(--primary-color);
-        }
-
-        .submenu {
-            display: none;
-            position: absolute;
-            background-color: #FFF;
-            min-width: 200px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            z-index: 1;
-        }
-
-        nav ul li:hover .submenu {
-            display: block;
-        }
-
-        .submenu a {
-            color: var(--text-color);
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .submenu a:hover {
-            background-color: var(--primary-color);
         }
 
         .section {
@@ -157,16 +146,43 @@
             border-radius: 4px;
         }
 
-        .auth-form {
-            background-color: #FFF;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-            max-width: 400px;
-            margin: 20px auto;
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
         }
 
-        .auth-form input {
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        form input, form textarea, form select {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
@@ -174,18 +190,32 @@
             border-radius: 4px;
         }
 
-        .auth-form button {
-            width: 100%;
-            padding: 10px;
+        form button {
             background-color: var(--secondary-color);
             color: #FFF;
             border: none;
+            padding: 10px 20px;
             border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        .auth-form button:hover {
+        form button:hover {
             background-color: #FF8F00;
+        }
+
+        #visitor-counter {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        .citation {
+            font-style: italic;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-left: 3px solid var(--secondary-color);
         }
     </style>
 </head>
@@ -199,167 +229,162 @@
     
     <nav>
         <ul>
-            <li>
-                <a href="#preparazione">Preparazione</a>
-                <div class="submenu">
-                    <a href="#impasto">Impasto</a>
-                    <a href="#lievitazione">Lievitazione</a>
-                    <a href="#cottura">Cottura</a>
-                    <a href="#" onclick="openModal('askQuestion')">Fai una domanda</a>
-                    <a href="#" onclick="openModal('shareExperience')">Condividi esperienza</a>
-                </div>
-            </li>
-            <li>
-                <a href="#consigli">Consigli</a>
-                <div class="submenu">
-                    <a href="#farina">Scelta della farina</a>
-                    <a href="#temperature">Temperature</a>
-                    <a href="#ingredienti">Ingredienti</a>
-                    <a href="#" onclick="openModal('askAdvice')">Chiedi un consiglio</a>
-                    <a href="#" onclick="openModal('shareTip')">Condividi un suggerimento</a>
-                </div>
-            </li>
-            <li>
-                <a href="#ricette">Ricette</a>
-                <div class="submenu">
-                    <a href="#classiche">Classiche</a>
-                    <a href="#gourmet">Gourmet</a>
-                    <a href="#vegane">Vegane</a>
-                    <a href="#" onclick="openModal('shareRecipe')">Condividi una ricetta</a>
-                    <a href="#" onclick="openModal('requestRecipe')">Richiedi una ricetta</a>
-                </div>
-            </li>
-            <li>
-                <a href="#calcolatore">Calcolatore</a>
-                <div class="submenu">
-                    <a href="#idratazione">Idratazione</a>
-                    <a href="#lievito">Lievito</a>
-                    <a href="#tempi">Tempi di lievitazione</a>
-                </div>
-            </li>
-            <li>
-                <a href="#ricettari">Ricettari</a>
-                <div class="submenu">
-                    <a href="#stagionali">Stagionali</a>
-                    <a href="#regionali">Regionali</a>
-                    <a href="#internazionali">Internazionali</a>
-                    <a href="#" onclick="openModal('shareRicettario')">Condividi un ricettario</a>
-                    <a href="#" onclick="openModal('browseRicettari')">Sfoglia ricettari</a>
-                </div>
-            </li>
-            <li><a href="#" id="authBtn">Iscriviti/Accedi</a></li>
+            <li><a href="#preparazione">Preparazione</a></li>
+            <li><a href="#consigli">Consigli</a></li>
+            <li><a href="#ricette">Ricette</a></li>
+            <li><a href="#calcolatore">Calcolatore</a></li>
+            <li><a href="#ricettari">Ricettari</a></li>
+            <li><a href="#" id="registerBtn">Iscriviti</a></li>
         </ul>
     </nav>
 
     <div class="container">
-        <div id="calcolatore" class="section">
-            <h2>Calcolatore di Ingredienti</h2>
-            <div id="calculator">
-                <select id="pizzaType">
-                    <option value="napoletana">Pizza Napoletana</option>
-                    <option value="teglia">Pizza in Teglia</option>
-                    <option value="pala">Pizza alla Pala</option>
-                </select>
-                <select id="yeastType">
-                    <option value="fresh">Lievito Fresco</option>
-                    <option value="dry">Lievito Secco</option>
-                    <option value="mother">Lievito Madre</option>
-                </select>
-                <input type="number" id="portions" placeholder="Numero di porzioni">
-                <input type="number" id="hydration" placeholder="Percentuale di idratazione (es. 65)">
-                <input type="number" id="leavenTime" placeholder="Tempo di lievitazione (ore)">
-                <button onclick="calculateIngredients()">Calcola</button>
-                <div id="result"></div>
+        <div class="main-content">
+            <div id="preparazione" class="section">
+                <h2>Preparazione della Pizza</h2>
+                <p>La preparazione della pizza perfetta richiede attenzione ai dettagli. Ecco i passaggi fondamentali:</p>
+                <ol>
+                    <li>Prepara l'impasto con farina, acqua, lievito e sale</li>
+                    <li>Lascia lievitare l'impasto per almeno 8 ore</li>
+                    <li>Stendi la pasta delicatamente</li>
+                    <li>Aggiungi il pomodoro e gli ingredienti desiderati</li>
+                    <li>Preriscalda il forno in modalità ventilata a 250°C</li>
+                    <li>Prima di infornare, passa a modalità statica</li>
+                    <li>Inforna la pizza nella parte più bassa del forno</li>
+                    <li>Negli ultimi 1-2 minuti, sposta la pizza sotto il grill per una perfetta doratura</li>
+                </ol>
+                <button onclick="openModal('askQuestion')">Fai una domanda sulla preparazione</button>
+            </div>
+            
+            <div id="consigli" class="section">
+                <h2>Consigli degli Esperti</h2>
+                <ul>
+                    <li>Usa farina di tipo 00 per un impasto leggero e digeribile</li>
+                    <li>La lievitazione lenta (24-48 ore) migliora il sapore e la digeribilità</li>
+                    <li>Non esagerare con gli ingredienti: in pizza, less is more!</li>
+                    <li>Preriscalda il forno con la pietra refrattaria per una cottura perfetta</li>
+                </ul>
+                <button onclick="openModal('askQuestion')">Chiedi un consiglio</button>
+            </div>
+            
+            <div id="ricette" class="section">
+                <h2>Le Nostre Ricette</h2>
+                <h3>Pizza Margherita Classica</h3>
+                <p>Ingredienti per 4 pizze:</p>
+                <ul>
+                    <li>1kg di farina tipo 00</li>
+                    <li>600ml di acqua</li>
+                    <li>3g di lievito di birra fresco</li>
+                    <li>20g di sale</li>
+                    <li>Pomodoro San Marzano</li>
+                    <li>Mozzarella di bufala</li>
+                    <li>Basilico fresco</li>
+                    <li>Olio extravergine d'oliva</li>
+                </ul>
+                <button onclick="openModal('shareRecipe')">Condividi la tua ricetta</button>
+            </div>
+            
+            <div id="calcolatore" class="section">
+                <h2>Calcolatore di Ingredienti</h2>
+                <div id="calculator">
+                    <select id="pizzaType">
+                        <option value="napoletana">Pizza Napoletana</option>
+                        <option value="teglia">Pizza in Teglia</option>
+                        <option value="pala">Pizza alla Pala</option>
+                    </select>
+                    <select id="yeastType">
+                        <option value="fresh">Lievito Fresco</option>
+                        <option value="dry">Lievito Secco</option>
+                        <option value="mother">Lievito Madre</option>
+                    </select>
+                    <input type="number" id="portions" placeholder="Numero di porzioni">
+                    <input type="number" id="hydration" placeholder="Percentuale di idratazione (es. 65)">
+                    <button onclick="calculateIngredients()">Calcola</button>
+                    <div id="result"></div>
+                </div>
+            </div>
+
+            <div id="ricettari" class="section">
+                <h2>Ricettari</h2>
+                <p>Condividi e scopri ricettari completi dedicati alla pizza:</p>
+                <ul id="ricettariList">
+                    <!-- I ricettari verranno aggiunti dinamicamente qui -->
+                </ul>
+                <button onclick="openModal('shareRicettario')">Condividi il tuo ricettario</button>
             </div>
         </div>
 
-        <div id="auth" class="section" style="display:none;">
-            <h2>Iscriviti o Accedi</h2>
-            <div class="auth-form">
-                <input type="text" id="username" placeholder="Nome utente">
-                <input type="email" id="email" placeholder="Email">
-                <input type="password" id="password" placeholder="Password">
-                <button onclick="register()">Iscriviti</button>
-                <button onclick="login()">Accedi</button>
+        <div class="sidebar">
+            <h3>Citazioni sulla Pizza</h3>
+            <div id="citazioni">
+                <div class="citation">"La vita è una combinazione magica di ingredienti perfetti, proprio come una pizza." - Anonimo</div>
+                <div class="citation">"Non c'è amore più sincero dell'amore per la pizza." - George Bernard Shaw</div>
+                <!-- Altre citazioni verranno aggiunte dinamicamente qui -->
+            </div>
+            <button onclick="openModal('shareCitation')">Condividi una citazione</button>
+            <div id="visitor-counter">
+                Visitatori: <span id="visitorCount">1</span>
             </div>
         </div>
     </div>
 
-    <script>
-        document.getElementById('authBtn').addEventListener('click', function() {
-            var authSection = document.getElementById('auth');
-            authSection.style.display = authSection.style.display === 'none' ? 'block' : 'none';
-        });
+    <!-- Modal per la registrazione -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Registrati</h2>
+            <form id="registerForm">
+                <input type="text" placeholder="Nome" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Registrati</button>
+            </form>
+        </div>
+    </div>
 
-        function register() {
-            var username = document.getElementById('username').value;
-            var email = document.getElementById('email').value;
-            var password = document.getElementById('password').value;
-            console.log('Registrazione:', username, email, password);
-            // Implementa la logica di registrazione
-        }
+    <!-- Modal per fare domande -->
+    <div id="questionModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Fai una domanda</h2>
+            <form id="questionForm">
+                <textarea placeholder="La tua domanda" required></textarea>
+                <button type="submit">Invia domanda</button>
+            </form>
+        </div>
+    </div>
 
-        function login() {
-            var email = document.getElementById('email').value;
-            var password = document.getElementById('password').value;
-            console.log('Login:', email, password);
-            // Implementa la logica di login
-        }
+    <!-- Modal per condividere ricette -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Condividi la tua ricetta</h2>
+            <form id="recipeForm">
+                <input type="text" placeholder="Nome della ricetta" required>
+                <textarea placeholder="Ingredienti" required></textarea>
+                <textarea placeholder="Procedimento" required></textarea>
+                <button type="submit">Condividi ricetta</button>
+            </form>
+        </div>
+    </div>
 
-        function openModal(modalType) {
-            console.log('Apertura modale:', modalType);
-            // Implementa la logica per aprire i vari modali
-        }
+    <!-- Modal per condividere citazioni -->
+    <div id="citationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Condividi una citazione</h2>
+            <form id="citationForm">
+                <textarea placeholder="La tua citazione" required></textarea>
+                <input type="text" placeholder="Autore (opzionale)">
+                <button type="submit">Condividi citazione</button>
+            </form>
+        </div>
+    </div>
 
-        function calculateIngredients() {
-            const pizzaType = document.getElementById('pizzaType').value;
-            const yeastType = document.getElementById('yeastType').value;
-            const portions = parseInt(document.getElementById('portions').value);
-            const hydration = parseInt(document.getElementById('hydration').value);
-            const leavenTime = parseInt(document.getElementById('leavenTime').value);
-
-            // Calcoli base
-            let flour = portions * 250; // 250g di farina per porzione
-            let water = (flour * hydration) / 100;
-            let salt = flour * 0.03; // 3% del peso della farina
-            let yeast;
-
-            // Calcolo del lievito in base al tipo e al tempo di lievitazione
-            if (yeastType === 'fresh') {
-                yeast = (flour * 0.02) * (24 / leavenTime); // 2% per 24 ore, aggiustato per il tempo di lievitazione
-            } else if (yeastType === 'dry') {
-                yeast = (flour * 0.005) * (24 / leavenTime); // 0.5% per 24 ore, aggiustato per il tempo di lievitazione
-            } else if (yeastType === 'mother') {
-                yeast = (flour * 0.2) * (24 / leavenTime); // 20% per 24 ore, aggiustato per il tempo di lievitazione
-            }
-
-            // Aggiustamenti in base al tipo di pizza
-            if (pizzaType === 'teglia') {
-                flour *= 1.2; // Più farina per la pizza in teglia
-                water *= 1.1; // Leggermente più acqua
-            } else if (pizzaType === 'pala') {
-                flour *= 1.1; // Leggermente più farina per la pizza alla pala
-                hydration -= 5; // Meno idratazione
-                water = (flour * hydration) / 100; // Ricalcolo dell'acqua
-            }
-
-            // Arrotondamento dei risultati
-            flour = Math.round(flour);
-            water = Math.round(water);
-            salt = Math.round(salt);
-            yeast = Math.round(yeast * 10) / 10; // Arrotondato a 1 decimale
-
-            const result = `
-                Per ${portions} ${pizzaType === 'napoletana' ? 'pizze' : 'porzioni'} di Pizza ${pizzaType.charAt(0).toUpperCase() + pizzaType.slice(1)}:
-                - Farina: ${flour}g
-                - Acqua: ${water}ml (${hydration}% di idratazione)
-                - Sale: ${salt}g
-                - ${yeastType === 'mother' ? 'Lievito madre' : 'Lievito'}: ${yeast}g
-                - Tempo di lievitazione: ${leavenTime} ore
-            `;
-
-            document.getElementById('result').innerText = result;
-        }
-    </script>
-</body>
-</html>
+    <!-- Modal per condividere ricettari -->
+    <div id="ricettarioModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Condividi il tuo ricettario</h2>
+            <form id="ricettarioForm">
+                <input type="text" placeholder="Titolo del ricett
