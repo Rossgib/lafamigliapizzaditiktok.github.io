@@ -4,238 +4,405 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Famiglia Pizza di TikTok</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        body, html {
-            height: 100%;
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+
+        :root {
+            --primary-color: #FFD54F;
+            --secondary-color: #FFA000;
+            --background-color: #FFF8E1;
+            --text-color: #4A4A4A;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
             margin: 0;
-            font-family: 'Arial', sans-serif;
-            color: #333;
+            padding: 0;
         }
-        .bg {
-            background-image: 
-                radial-gradient(circle, #f3c354 2px, transparent 2px),
-                radial-gradient(circle, #d13a3a 3px, transparent 3px),
-                radial-gradient(circle, #0c5e0c 2px, transparent 2px);
-            background-size: 50px 50px, 60px 60px, 70px 70px;
-            background-position: 0 0, 25px 25px, 35px 35px;
-            background-color: #fff5e6;
-            height: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: -1;
-            opacity: 0.3;
-        }
-        .content {
-            padding: 20px;
-            max-width: 1000px;
+
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
             margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 10px;
+            padding: 20px;
         }
+
+        .main-content {
+            flex: 3;
+            margin-right: 20px;
+        }
+
+        .sidebar {
+            flex: 1;
+            background-color: #FFF;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
         header {
-            text-align: center;
+            background-color: var(--primary-color);
             padding: 20px 0;
-            background-color: #e74c3c;
-            color: white;
-            border-radius: 10px 10px 0 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        h1 {
-            margin: 0;
-            font-size: 2.5em;
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            background-color: #FFF;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 48px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--secondary-color);
+        }
+
         nav {
-            background-color: #333;
+            background-color: var(--secondary-color);
             padding: 10px 0;
         }
+
         nav ul {
             list-style-type: none;
             padding: 0;
             margin: 0;
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
         }
+
         nav ul li {
-            margin: 5px 15px;
+            margin: 0 15px;
+            position: relative;
         }
+
         nav ul li a {
-            color: white;
             text-decoration: none;
+            color: #FFF;
             font-weight: bold;
+            transition: color 0.3s ease;
         }
-        .section {
-            margin-top: 30px;
+
+        nav ul li a:hover {
+            color: var(--primary-color);
         }
-        .tiktok-info {
-            text-align: center;
-            margin: 20px 0;
-        }
-        .tiktok-logo {
-            width: 50px;
-            vertical-align: middle;
-        }
-        .video-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-        .video-placeholder {
-            width: 200px;
-            height: 350px;
-            background-color: #f1f1f1;
-            margin: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            color: #789;
-        }
-        #calculator {
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
             background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
         }
-        #calculator input {
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        nav ul li:hover .dropdown-content {
+            display: block;
+        }
+
+        .section {
+            background-color: #FFF;
+            margin: 20px 0;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        #calculator {
+            background-color: var(--primary-color);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        #calculator select, #calculator input, #calculator button {
             width: 100%;
             padding: 10px;
-            margin: 5px 0;
+            margin: 10px 0;
+            border: none;
+            border-radius: 4px;
         }
+
         #calculator button {
-            background-color: #e74c3c;
-            color: white;
+            background-color: var(--secondary-color);
+            color: #FFF;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #calculator button:hover {
+            background-color: #FF8F00;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            background-color: #FFF;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        form input, form textarea, form select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        form button {
+            background-color: var(--secondary-color);
+            color: #FFF;
             border: none;
             padding: 10px 20px;
+            border-radius: 4px;
             cursor: pointer;
-            margin-top: 10px;
+            transition: background-color 0.3s ease;
         }
-        footer {
+
+        form button:hover {
+            background-color: #FF8F00;
+        }
+
+        #visitor-counter {
             text-align: center;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        .citation {
+            font-style: italic;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-left: 3px solid var(--secondary-color);
+        }
+
+        .user-content {
+            background-color: #f9f9f9;
+            border-left: 3px solid var(--primary-color);
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        .user-content .author {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .user-content .date {
+            font-size: 0.8em;
+            color: #888;
+        }
+
+        #user-profile {
+            background-color: #FFF;
             padding: 20px;
-            background-color: #333;
-            color: white;
-            border-radius: 0 0 10px 10px;
-            margin-top: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        #user-profile img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
         }
     </style>
 </head>
 <body>
-    <div class="bg"></div>
-    <div class="content">
-        <header>
+    <header>
+        <div class="header-content">
+            <div class="logo">🍕</div>
             <h1>La Famiglia Pizza di TikTok</h1>
-        </header>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#ricette">Ricette</a></li>
-                <li><a href="#ricette-proposte">Ricette Proposte da Voi</a></li>
-                <li><a href="#comefaccio">Come Faccio?</a></li>
-                <li><a href="#calcolatore">Calcolatore Pizza</a></li>
-            </ul>
-        </nav>
-        <main>
-            <section id="home" class="section">
-                <div class="tiktok-info">
-                    <h2>Seguici su TikTok!</h2>
-                    <p>
-                       <img src="pizza_icon.png" alt="Pizza Icon" class="pizza-logo"> <!-- Icona di pizza -->
-        <div class="username">@lafamigliapizzaditiktok</div> <!-- Nome utente TikTok -->
-    </div>
-                    </p>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li>
+                <a href="#preparazione">Preparazione</a>
+                <div class="dropdown-content">
+                    <a href="#" onclick="openModal('sharePreparation')">Condividi Tecnica</a>
+                    <a href="#" onclick="openModal('askPreparation')">Chiedi Consiglio</a>
                 </div>
-                <p>Benvenuti nel mondo gustoso de La Famiglia Pizza di TikTok! Qui condividiamo la nostra passione per la pizza attraverso video divertenti e ricette deliziose.</p>
-                <h3>I Nostri Video Più Popolari</h3>
-              <div class="video-container">
-    <div class="video-placeholder">
-        <a href="https://www.tiktok.com/@lafamigliapizzaditiktok/video/7150226229533150470?lang=it-IT">Video TikTok 1</a>
-    </div>
-    <div class="video-placeholder">
-        <a href="https://www.tiktok.com/@lafamigliapizzaditiktok/video/7299866616236395809?_r=1&_t=8npSDb6i1Z3">Video TikTok 2</a>
-    </div>
-    <div class="video-placeholder">
-        <a href="https://www.tiktok.com/@lafamigliapizzaditiktok/video/7300576202731949344?_r=1&_t=8npSFtGbqZU">Video TikTok 3</a>
-    </div>
-</div>
-
-
-
+            </li>
+            <li>
+                <a href="#consigli">Consigli</a>
+                <div class="dropdown-content">
+                    <a href="#" onclick="openModal('shareTip')">Condividi Consiglio</a>
+                    <a href="#" onclick="openModal('askTip')">Chiedi Consiglio</a>
                 </div>
-            </section>
+            </li>
+            <li>
+                <a href="#ricette">Ricette</a>
+                <div class="dropdown-content">
+                    <a href="#" onclick="openModal('shareRecipe')">Condividi Ricetta</a>
+                    <a href="#" onclick="openModal('askRecipe')">Chiedi Ricetta</a>
+                </div>
+            </li>
+            <li><a href="#calcolatore">Calcolatore</a></li>
+            <li>
+                <a href="#ricettari">Ricettari</a>
+                <div class="dropdown-content">
+                    <a href="#" onclick="openModal('shareRicettario')">Condividi Ricettario</a>
+                    <a href="#" onclick="openModal('askRicettario')">Chiedi Ricettario</a>
+                </div>
+            </li>
+            <li><a href="#" id="loginBtn">Accedi/Registrati</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="main-content">
+            <div id="user-profile" style="display: none;">
+                <!-- Il profilo utente verrà popolato dinamicamente qui -->
+            </div>
+
+            <div id="preparazione" class="section">
+                <h2>Preparazione della Pizza</h2>
+                <p>La preparazione della pizza perfetta richiede attenzione ai dettagli. Ecco i passaggi fondamentali:</p>
+                <ol>
+                    <li>Prepara l'impasto con farina, acqua, lievito e sale</li>
+                    <li>Lascia lievitare l'impasto per almeno 8 ore</li>
+                    <li>Stendi la pasta delicatamente</li>
+                    <li>Aggiungi il pomodoro e gli ingredienti desiderati</li>
+                    <li>Preriscalda il forno in modalità ventilata a 250°C</li>
+                    <li>Prima di infornare, passa a modalità statica</li>
+                    <li>Inforna la pizza nella parte più bassa del forno</li>
+                    <li>Negli ultimi 1-2 minuti, sposta la pizza sotto il grill per una perfetta doratura</li>
+                </ol>
+                <div id="user-preparations">
+                    <!-- Le preparazioni condivise dagli utenti verranno aggiunte qui dinamicamente -->
+                </div>
+            </div>
             
-            <section id="ricette" class="section">
+            <div id="consigli" class="section">
+                <h2>Consigli degli Esperti</h2>
+                <ul>
+                    <li>Usa farina di tipo 00 per un impasto leggero e digeribile</li>
+                    <li>La lievitazione lenta (24-48 ore) migliora il sapore e la digeribilità</li>
+                    <li>Non esagerare con gli ingredienti: in pizza, less is more!</li>
+                    <li>Preriscalda il forno con la pietra refrattaria per una cottura perfetta</li>
+                </ul>
+                <div id="user-tips">
+                    <!-- I consigli condivisi dagli utenti verranno aggiunti qui dinamicamente -->
+                </div>
+            </div>
+            
+            <div id="ricette" class="section">
                 <h2>Le Nostre Ricette</h2>
+                <h3>Pizza Margherita Classica</h3>
+                <p>Ingredienti per 4 pizze:</p>
                 <ul>
-                    <li>Pizza Margherita Classica</li>
-                    <li>Pizza in teglia Classica</li>
-                    <li>Pizza Cosacca</li>
-                    <li>Pizza fritta</li>
+                    <li>1kg di farina tipo 00</li>
+                    <li>600ml di acqua</li>
+                    <li>3g di lievito di birra fresco</li>
+                    <li>20g di sale</li>
+                    <li>Pomodoro San Marzano</li>
+                    <li>Mozzarella di bufala</li>
+                    <li>Basilico fresco</li>
+                    <li>Olio extravergine d'oliva</li>
                 </ul>
-            </section>
-            
-            <section id="ricette-proposte" class="section">
-                <h2>Ricette Proposte da Voi</h2>
-                <p>Hai un'idea per una pizza unica? Proponi la tua ricetta! Compila il nostro form per inviarci la tua creazione. Le migliori idee saranno realizzate in video e pubblicate qui sul sito e sul nostro canale TikTok.</p>
-                <button onclick="alert('Form in arrivo presto!')">Proponi la Tua Ricetta</button>
-                <h3>Ricette da Realizzate</h3>
-                <ul>
-                    <li>Pizza al Pistacchio 
-                    <li>Pizza Sushi Fusion 
-                    <li>Pizza Arcobaleno 
-                    <li>Pizza Carbonara
-                </ul>
-            </section>
-            
-            <section id="comefaccio" class="section">
-                <h2>Come Faccio?</h2>
-                <ul>
-                    <li>Come stendere l'impasto perfetto</li>
-                    <li>Come scegliere gli ingredienti giusti</li>
-                    <li>Come cuocere la pizza nel forno di casa</li>
-                    <li>Come conservare la pizza</li>
-                </ul>
-            </section>
-            
-            <section id="calcolatore" class="section">
-                <h2>Calcolatore per Pizza Fatta in Casa</h2>
-                <div id="calculator">
-                    <input type="number" id="numPizze" placeholder="Numero di pizze">
-                    <input type="number" id="pesoPizza" placeholder="Peso per pizza (g)">
-                    <button onclick="calcolaPizza()">Calcola Ingredienti</button>
-                    <div id="risultato"></div>
+                <div id="user-recipes">
+                    <!-- Le ricette condivise dagli utenti verranno aggiunte qui dinamicamente -->
                 </div>
-            </section>
-        </main>
-        <footer>
-            <p>&copy; 2024 La Famiglia Pizza di TikTok. Tutti i diritti riservati.</p>
-        </footer>
-    </div>
+            </div>
+            
+            <div id="calcolatore" class="section">
+                <h2>Calcolatore di Ingredienti</h2>
+                <div id="calculator">
+                    <select id="pizzaType">
+                        <option value="napoletana">Pizza Napoletana</option>
+                        <option value="teglia">Pizza in Teglia</option>
+                        <option value="pala">Pizza alla Pala</option>
+                    </select>
+                    <select id="yeastType">
+                        <option value="fresh">Lievito Fresco</option>
+                        <option value="dry">Lievito Secco</option>
+                        <option value="mother">Lievito Madre</option>
+                    </select>
+                    <input type="number" id="portions" placeholder="Numero di porzioni">
+                    <input type="number" id="hydration" placeholder="Percentuale di idratazione (es. 65)">
+                    <button onclick="calculateIngredients()">Calcola</button>
+                    <div id="result"></div>
+                </div>
+            </div>
 
-    <script>
-        function calcolaPizza() {
-            const numPizze = document.getElementById('numPizze').value;
-            const pesoPizza = document.getElementById('pesoPizza').value;
-            const pesoTotale = numPizze * pesoPizza;
-            
-            const farina = pesoTotale * 0.62;
-            const acqua = pesoTotale * 0.35;
-            const sale = pesoTotale * 0.02;
-            const lievito = pesoTotale * 0.01;
-            
-            const risultato = `
-                Per ${numPizze} pizze da ${pesoPizza}g ciascuna:
-                <br>Farina: ${farina.toFixed(1)}g (62%)
-                <br>Acqua: ${acqua.toFixed(1)}g (35%)
-                <br>Sale: ${sale.toFixed(1)}g (2%)
-                <br>Lievito: ${lievito.toFixed(1)}g (1%)
-            `;
-            
-            document.getElementById('risultato').innerHTML = risultato;
-        }
-    </script>
-</body>
-</html>
+            <div id="ricettari" class="section">
+                <h2>Ricettari</h2>
+                <p>Scopri e condividi ricettari completi dedicati alla pizza:</p>
+                <div id="user-ricettari">
+                    <!-- I ricettari condivisi dagli utenti verranno aggiunti qui dinamicamente -->
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar
