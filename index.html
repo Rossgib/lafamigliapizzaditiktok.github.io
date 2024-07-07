@@ -1,124 +1,581 @@
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>La Famiglia Pizza di TikTok</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Famiglia Pizza di TikTok</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
 
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+        :root {
+            --primary-color: #FFD54F;
+            --secondary-color: #FFA000;
+            --background-color: #FFF8E1;
+            --text-color: #4A4A4A;
+        }
 
-    :root {
-      --primary-color: #FFD54F;
-      --secondary-color: #FFA000;
-      --background-color: #FFF8E1;
-      --text-color: #4A4A4A;
-    }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
 
-    body {
-      font-family: 'Roboto', sans-serif;
-      background-color: var(--background-color);
-      color: var(--text-color);
-      line-height: 1.6;
-      margin: 0;
-      padding: 0;
-    }
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-    .container {
-      display: flex;
-      width: 90%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
+        .main-content {
+            flex: 3;
+            margin-right: 20px;
+        }
 
-    .main-content {
-      flex: 3;
-      margin-right: 20px;
-    }
+        .sidebar {
+            flex: 1;
+            background-color: #FFF;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
 
-    .sidebar {
-      flex: 1;
-      background-color: #FFF;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-    }
+        header {
+            background-color: var(--primary-color);
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
 
-    header {
-      background-color: var(--primary-color);
-      padding: 20px 0;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 90%;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+        .logo {
+            width: 100px;
+            height: 100px;
+            background-color: #FFF;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 48px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
 
-    .logo {
-      width: 100px;
-      height: 100px;
-      background-color: #FFF;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 48px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--secondary-color);
+        }
 
-    h1,
-    h2,
-    h3 {
-      font-family: 'Playfair Display', serif;
-      color: var(--secondary-color);
-    }
+        nav {
+            background-color: var(--secondary-color);
+            padding: 10px 0;
+        }
 
-    nav {
-      background-color: var(--secondary-color);
-      padding: 10px 0;
-    }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
 
-    nav ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-    }
+        nav ul li {
+            position: relative;
+            margin: 0 15px;
+        }
 
-    nav ul li {
-      position: relative;
-      margin: 0 15px;
-    }
+        nav ul li a {
+            text-decoration: none;
+            color: #FFF;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
 
-    nav ul li a {
-      text-decoration: none;
-      color: #FFF;
-      font-weight: bold;
-      transition: color 0.3s ease;
-    }
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
 
-    nav ul li a:hover {
-      color: var(--primary-color);
-    }
+        .submenu {
+            display: none;
+            position: absolute;
+            background-color: #FFF;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+        }
 
-    .submenu {
-      display: none;
-      position: absolute;
-      background-color: #FFF;
-      min-width: 200px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-      z-index: 1;
-    }
+        nav ul li:hover .submenu {
+            display: block;
+        }
 
-    nav ul li:hover .submenu {
-      display: block
+        .submenu a {
+            color: var(--text-color);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .submenu a:hover {
+            background-color: var(--primary-color);
+        }
+
+        .section {
+            background-color: #FFF;
+            margin: 20px 0;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        #calculator {
+            background-color: var(--primary-color);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        #calculator h3 {
+            color: var(--text-color);
+            margin-bottom: 15px;
+        }
+
+        #calculator select, #calculator input, #calculator button {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #calculator select, #calculator input {
+            background-color: #FFF;
+            color: var(--text-color);
+        }
+
+        #calculator button {
+            background-color: var(--secondary-color);
+            color: #FFF;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+
+        #calculator button:hover {
+            background-color: #FF8F00;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            background-color: #FFF;
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .auth-form {
+            background-color: #FFF;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        .auth-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .auth-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--secondary-color);
+            color: #FFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .auth-form button:hover {
+            background-color: #FF8F00;
+        }
+
+        #visitor-counter, #quote-box {
+            background-color: #FFF;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        #visitor-counter {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        #quote-box {
+            font-style: italic;
+        }
+
+        #quote-box .author {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Modal styles */
+        .modal-content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #000;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">🍕</div>
+            <h1>La Famiglia Pizza di TikTok</h1>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li>
+                <a href="#preparazione">Preparazione</a>
+                <div class="submenu">
+                    <a href="#impasto">Impasto</a>
+                    <a href="#lievitazione">Lievitazione</a>
+                    <a href="#cottura">Cottura</a>
+                    <a href="#" onclick="openModal('askQuestion')">Fai una domanda</a>
+                    <a href="#" onclick="openModal('shareExperience')">Condividi esperienza</a>
+                </div>
+            </li>
+            <li>
+                <a href="#consigli">Consigli</a>
+                <div class="submenu">
+                    <a href="#farina">Scelta della farina</a>
+                    <a href="#temperature">Temperature</a>
+                    <a href="#ingredienti">Ingredienti</a>
+                    <a href="#" onclick="openModal('askAdvice')">Chiedi un consiglio</a>
+                    <a href="#" onclick="openModal('shareTip')">Condividi un suggerimento</a>
+                </div>
+            </li>
+            <li>
+                <a href="#ricette">Ricette</a>
+                <div class="submenu">
+                    <a href="#margherita">Margherita</a>
+                    <a href="#pepperoni">Pepperoni</a>
+                    <a href="#vegetariana">Vegetariana</a>
+                </div>
+            </li>
+            <li>
+                <a href="#calcolatore">Calcolatore</a>
+            </li>
+            <li>
+                <a href="#contattaci">Contattaci</a>
+                <div class="submenu">
+                    <a href="#" onclick="openModal('login')">Accedi</a>
+                    <a href="#" onclick="openModal('register')">Registrati</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="main-content">
+            <section id="preparazione" class="section">
+                <h2>Preparazione</h2>
+                <p>La preparazione della pizza è un'arte che richiede pazienza e precisione...</p>
+                <div id="impasto">
+                    <h3>Impasto</h3>
+                    <p>Il segreto di una buona pizza sta nell'impasto...</p>
+                </div>
+                <div id="lievitazione">
+                    <h3>Lievitazione</h3>
+                    <p>La lievitazione è un processo cruciale per ottenere una pizza soffice...</p>
+                </div>
+                <div id="cottura">
+                    <h3>Cottura</h3>
+                    <p>La cottura deve essere fatta ad alte temperature...</p>
+                </div>
+            </section>
+
+            <section id="consigli" class="section">
+                <h2>Consigli</h2>
+                <p>Ecco alcuni consigli per migliorare la tua pizza...</p>
+                <div id="farina">
+                    <h3>Scelta della Farina</h3>
+                    <p>La farina giusta fa la differenza...</p>
+                </div>
+                <div id="temperature">
+                    <h3>Temperature</h3>
+                    <p>Le temperature giuste per ogni fase della preparazione...</p>
+                </div>
+                <div id="ingredienti">
+                    <h3>Ingredienti</h3>
+                    <p>Ingredienti di qualità sono fondamentali...</p>
+                </div>
+            </section>
+
+            <section id="ricette" class="section">
+                <h2>Ricette</h2>
+                <p>Scopri le nostre ricette di pizza, dalle classiche alle gourmet...</p>
+                <div id="margherita">
+                    <h3>Margherita</h3>
+                    <p>Ingredienti e preparazione della classica pizza Margherita...</p>
+                </div>
+                <div id="pepperoni">
+                    <h3>Pepperoni</h3>
+                    <p>Ingredienti e preparazione della pizza Pepperoni...</p>
+                </div>
+                <div id="vegetariana">
+                    <h3>Vegetariana</h3>
+                    <p>Ingredienti e preparazione della pizza Vegetariana...</p>
+                </div>
+            </section>
+
+            <section id="calcolatore" class="section">
+                <h2>Calcolatore degli Ingredienti</h2>
+                <div id="calculator">
+                    <h3>Calcolatore della Pizza</h3>
+                    <form id="pizzaForm">
+                        <label for="pizzaType">Tipo di Pizza:</label>
+                        <select id="pizzaType" name="pizzaType">
+                            <option value="margherita">Margherita</option>
+                            <option value="pepperoni">Pepperoni</option>
+                            <option value="vegetariana">Vegetariana</option>
+                            <option value="verace">Verace</option>
+                            <option value="teglia">Teglia</option>
+                            <option value="pala">Pala</option>
+                            <option value="calzone">Calzone Ripieno</option>
+                            <option value="panuozzo">Panuozzo</option>
+                            <option value="fritta">Pizza Fritta</option>
+                        </select>
+
+                        <label for="numPizzas">Numero di Pizze:</label>
+                        <input type="number" id="numPizzas" name="numPizzas" min="1" max="10" value="1">
+
+                        <label for="hydration">Percentuale di Idratazione (%):</label>
+                        <input type="number" id="hydration" name="hydration" min="50" max="100" value="60">
+
+                        <button type="button" onclick="calculateIngredients()">Calcola Ingredienti</button>
+                    </form>
+
+                    <div id="result"></div>
+                </div>
+            </section>
+
+            <section id="contattaci" class="section">
+                <h2>Contattaci</h2>
+                <p>Per qualsiasi domanda, non esitare a contattarci tramite il modulo sottostante...</p>
+                <div id="visitor-counter">Numero di visitatori: <span id="visitorCount">0</span></div>
+                <div id="quote-box">
+                    <p>"La pizza è l'arte della felicità." <span class="author">- Autore sconosciuto</span></p>
+                </div>
+            </section>
+        </div>
+        
+        <aside class="sidebar">
+            <h3>Utente Autenticato</h3>
+            <div class="auth-form">
+                <input type="text" id="username" placeholder="Nome Utente">
+                <input type="password" id="password" placeholder="Password">
+                <button onclick="login()">Accedi</button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Modal structure -->
+    <div id="askQuestion" class="modal-content" style="display:none;">
+        <span class="close" onclick="closeModal('askQuestion')">&times;</span>
+        <div class="modal-body">
+            <h3>Fai una domanda</h3>
+            <textarea id="question" rows="5" placeholder="Scrivi qui la tua domanda..."></textarea>
+            <button onclick="submitQuestion()">Invia</button>
+        </div>
+    </div>
+
+    <div id="shareExperience" class="modal-content" style="display:none;">
+        <span class="close" onclick="closeModal('shareExperience')">&times;</span>
+        <div class="modal-body">
+            <h3>Condividi la tua esperienza</h3>
+            <textarea id="experience" rows="5" placeholder="Condividi la tua esperienza..."></textarea>
+            <button onclick="submitExperience()">Invia</button>
+        </div>
+    </div>
+
+    <div id="askAdvice" class="modal-content" style="display:none;">
+        <span class="close" onclick="closeModal('askAdvice')">&times;</span>
+        <div class="modal-body">
+            <h3>Chiedi un consiglio</h3>
+            <textarea id="advice" rows="5" placeholder="Scrivi qui la tua richiesta di consiglio..."></textarea>
+            <button onclick="submitAdvice()">Invia</button>
+        </div>
+    </div>
+
+    <div id="shareTip" class="modal-content" style="display:none;">
+        <span class="close" onclick="closeModal('shareTip')">&times;</span>
+        <div class="modal-body">
+            <h3>Condividi un suggerimento</h3>
+            <textarea id="tip" rows="5" placeholder="Scrivi qui il tuo suggerimento..."></textarea>
+            <button onclick="submitTip()">Invia</button>
+        </div>
+    </div>
+
+    <div id="login" class="modal-content" style="display:none;">
+        <span class="close" onclick="closeModal('login')">&times;</span>
+        <div class="modal-body">
+            <h3>Accedi</h3>
+            <input type="text" id="loginUsername" placeholder="Nome Utente">
+            <input type="password" id="loginPassword" placeholder="Password">
+            <button onclick="performLogin()">Accedi</button>
+        </div>
+    </div>
+
+    <div id="register" class="modal-content" style="display:none;">
+        <span class="close" onclick="closeModal('register')">&times;</span>
+        <div class="modal-body">
+            <h3>Registrati</h3>
+            <input type="text" id="registerUsername" placeholder="Nome Utente">
+            <input type="password" id="registerPassword" placeholder="Password">
+            <button onclick="performRegister()">Registrati</button>
+        </div>
+    </div>
+
+    <script>
+        function calculateIngredients() {
+            const pizzaType = document.getElementById('pizzaType').value;
+            const numPizzas = document.getElementById('numPizzas').value;
+            const hydration = document.getElementById('hydration').value;
+            let result = '';
+
+            let flour = numPizzas * 100;
+            let water = (hydration / 100) * flour;
+            let yeast = numPizzas * 10;
+            let salt = numPizzas * 5;
+            let oil = numPizzas * 10;
+
+            switch (pizzaType) {
+                case 'verace':
+                    yeast *= 0.5;
+                    oil *= 0.5;
+                    break;
+                case 'teglia':
+                    water *= 1.1;
+                    break;
+                case 'pala':
+                    water *= 1.2;
+                    break;
+                case 'calzone':
+                    flour *= 1.2;
+                    break;
+                case 'panuozzo':
+                    flour *= 0.8;
+                    break;
+                case 'fritta':
+                    oil *= 1.5;
+                    break;
+            }
+
+            result += `<p>Farina: ${flour.toFixed(2)} g</p>`;
+            result += `<p>Acqua: ${water.toFixed(2)} ml</p>`;
+            result += `<p>Lievito: ${yeast.toFixed(2)} g</p>`;
+            result += `<p>Sale: ${salt.toFixed(2)} g</p>`;
+            result += `<p>Olio: ${oil.toFixed(2)} ml</p>`;
+
+            document.getElementById('result').innerHTML = result;
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function submitQuestion() {
+            const question = document.getElementById('question').value;
+            alert('Domanda inviata con successo!'); // Simulazione invio domanda
+            closeModal('askQuestion');
+        }
+
+        function submitExperience() {
+            const experience = document.getElementById('experience').value;
+            alert('Esperienza condivisa con successo!'); // Simulazione invio esperienza
+            closeModal('shareExperience');
+        }
+
+        function submitAdvice() {
+            const advice = document.getElementById('advice').value;
+            alert('Consiglio inviato con successo!'); // Simulazione invio consiglio
+            closeModal('askAdvice');
+        }
+
+        function submitTip() {
+            const tip = document.getElementById('tip').value;
+            alert('Suggerimento condiviso con successo!'); // Simulazione invio suggerimento
+            closeModal('shareTip');
+        }
+
+        function performLogin() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            alert('Accesso effettuato con successo!'); // Simulazione accesso
+            closeModal('login');
+        }
+
+        function performRegister() {
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+            alert('Registrazione effettuata con successo!'); // Simulazione registrazione
+            closeModal('register');
+        }
+
+        // Simulazione contatore visitatori
+        let visitorCount = 0;
+        setInterval(() => {
+            visitorCount++;
+            document.getElementById('visitorCount').innerText = visitorCount;
+        }, 5000); // Incrementa il contatore ogni 5 secondi
+    </script>
+</body>
+</html>
+
