@@ -1,8 +1,3 @@
-Certamente! Utilizzerò il codice iniziale fornito come base e apporterò le modifiche necessarie per implementare tutte le funzionalità aggiuntive, migliorare il layout, aggiungere uno sfondo, una barra degli strumenti, tab laterali e un logo con la scritta "lafamigliapizzaditiktok" in maniera elegante.
-
-Ecco il codice HTML aggiornato:
-
-```html
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -325,9 +320,7 @@ Ecco il codice HTML aggiornato:
             </li>
             <li>
                 <a href="#ricette">Ricette</a>
-                <div class
-
-="submenu">
+                <div class="submenu">
                     <a href="#margherita">Margherita</a>
                     <a href="#cosacca">Cosacca</a>
                     <a href="#marinara">Marinara</a>
@@ -510,9 +503,7 @@ Ecco il codice HTML aggiornato:
             var now = new Date();
             var hours = now.getHours().toString().padStart(2, '0');
             var minutes = now.getMinutes().toString().padStart(2, '0');
-            var seconds = now.getSeconds().toString().padStart(2, '
-
-0');
+            var seconds = now.getSeconds().toString().padStart(2, '0');
             document.getElementById('clock').innerText = hours + ':' + minutes + ':' + seconds;
 
             var date = now.toLocaleDateString('it-IT', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
