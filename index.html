@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="La Famiglia Pizza di TikTok - Impara l'arte della pizza napoletana">
     <title>La Famiglia Pizza di TikTok</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;700&display=swap');
 
@@ -13,6 +14,13 @@
             --secondary-color: #FFA000;
             --background-color: #FFF8E1;
             --text-color: #4A4A4A;
+            --accent-color: #FF6F00;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
@@ -20,44 +28,17 @@
             background-color: var(--background-color);
             color: var(--text-color);
             line-height: 1.6;
-            margin: 0;
-            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         .container {
-            display: flex;
-            flex-direction: column;
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-        }
-
-        @media (min-width: 768px) {
-            .container {
-                flex-direction: row;
-            }
-        }
-
-        .main-content {
-            flex: 3;
-            margin-right: 0;
-            margin-bottom: 20px;
-        }
-
-        @media (min-width: 768px) {
-            .main-content {
-                margin-right: 20px;
-                margin-bottom: 0;
-            }
-        }
-
-        .sidebar {
-            flex: 1;
-            background-color: #FFF;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            display: flex;
         }
 
         header {
@@ -68,37 +49,20 @@
 
         .header-content {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        @media (min-width: 768px) {
-            .header-content {
-                flex-direction: row;
-                justify-content: space-between;
-            }
         }
 
         .logo {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             background-color: #FFF;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 48px;
+            font-size: 40px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-
-        @media (min-width: 768px) {
-            .logo {
-                margin-bottom: 0;
-            }
         }
 
         h1, h2, h3 {
@@ -109,16 +73,13 @@
         nav {
             background-color: var(--secondary-color);
             padding: 10px 0;
-            overflow-x: auto;
-            white-space: nowrap;
         }
 
         nav ul {
             list-style-type: none;
-            padding: 0;
-            margin: 0;
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         nav ul li {
@@ -161,6 +122,18 @@
 
         .submenu a:hover {
             background-color: var(--primary-color);
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .sidebar {
+            width: 250px;
+            padding: 20px;
+            background-color: #FFF;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
         }
 
         .section {
@@ -206,7 +179,7 @@
         }
 
         #calculator button:hover {
-            background-color: #FF8F00;
+            background-color: var(--accent-color);
         }
 
         #result {
@@ -218,121 +191,105 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .auth-form {
-            background-color: #FFF;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-            max-width: 400px;
-            margin: 20px auto;
-        }
-
-        .auth-form input {
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        .auth-form button {
-            width: 100%;
-            padding: 10px;
-            background-color: var(--secondary-color);
-            color: #FFF;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .auth-form button:hover {
-            background-color: #FF8F00;
-        }
-
-        #visitor-counter, #quote-box, #clock, #calendar {
-            background-color: #FFF;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-
-        #visitor-counter {
-            text-align: center;
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-
-        #quote-box {
-            font-style: italic;
-        }
-
-        #quote-box .author {
-            text-align: right;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        #clock, #calendar {
-            text-align: center;
-            font-size: 1.2em;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
         }
 
         .modal-content {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
+            background-color: #fefefe;
+            margin: 15% auto;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            width: 90%;
+            border: 1px solid #888;
+            width: 80%;
             max-width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         .close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
             cursor: pointer;
-            font-size: 24px;
+        }
+
+        .close:hover,
+        .close:focus {
             color: #000;
+            text-decoration: none;
+            cursor: pointer;
         }
 
-        .modal-body {
-            padding: 20px;
-        }
-
-        .modal-body textarea, .modal-body input {
-            width: 100%;
+        #clock, #calendar, #quote {
+            font-size: 1.2em;
+            text-align: center;
+            margin-top: 20px;
+            background-color: #FFF;
             padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
             border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .modal-body button {
-            width: 100%;
-            padding: 10px;
+        footer {
             background-color: var(--secondary-color);
             color: #FFF;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: auto;
         }
 
-        .modal-body button:hover {
-            background-color: #FF8F00;
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                order: -1;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                margin-bottom: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            .submenu {
+                position: static;
+                display: none;
+                width: 100%;
+            }
+
+            nav ul li:hover .submenu {
+                display: block;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="header-content">
+        <div class="container header-content">
             <div class="logo">🍕</div>
             <h1>La Famiglia Pizza di TikTok</h1>
         </div>
@@ -346,8 +303,6 @@
                     <a href="#impasto">Impasto</a>
                     <a href="#lievitazione">Lievitazione</a>
                     <a href="#cottura">Cottura</a>
-                    <a href="#" onclick="openModal('askQuestion')">Fai una domanda</a>
-                    <a href="#" onclick="openModal('shareExperience')">Condividi esperienza</a>
                 </div>
             </li>
             <li>
@@ -356,8 +311,6 @@
                     <a href="#farina">Scelta della farina</a>
                     <a href="#temperature">Temperature</a>
                     <a href="#ingredienti">Ingredienti</a>
-                    <a href="#" onclick="openModal('askAdvice')">Chiedi un consiglio</a>
-                    <a href="#" onclick="openModal('shareTip')">Condividi un suggerimento</a>
                 </div>
             </li>
             <li>
@@ -381,17 +334,19 @@
                 <a href="#calcolatore">Calcolatore</a>
             </li>
             <li>
-                <a href="#contattaci">Contattaci</a>
+                <a href="#community">Community</a>
                 <div class="submenu">
                     <a href="#" onclick="openModal('login')">Accedi</a>
                     <a href="#" onclick="openModal('register')">Registrati</a>
+                    <a href="#" onclick="openModal('askQuestion')">Fai una domanda</a>
+                    <a href="#" onclick="openModal('shareExperience')">Condividi esperienza</a>
                 </div>
             </li>
         </ul>
     </nav>
 
     <div class="container">
-        <div class="main-content">
+        <main>
             <section id="preparazione" class="section">
                 <h2>Preparazione</h2>
                 <div id="impasto">
@@ -420,4 +375,45 @@
                 </div>
                 <div id="ingredienti">
                     <h3>Ingredienti</h3>
-                    <p
+                    <p>Scegliete sempre ingredienti di alta qualità. Per il pomodoro, optate per San Marzano DOP. La mozzarella di bufala campana DOP è l'ideale per la pizza napoletana, ma una fiordilatte di qualità è un'ottima alternativa.</p>
+                </div>
+            </section>
+
+            <section id="calcolatore" class="section">
+                <h2>Calcolatore Impasto Pizza</h2>
+                <div id="calculator">
+                    <h3>Calcola le tue dosi</h3>
+                    <select id="pizzaType">
+                        <option value="napoletana">Pizza Napoletana</option>
+                        <option value="romana">Pizza Romana</option>
+                        <option value="teglia">Pizza in Teglia</option>
+                    </select>
+                    <input type="number" id="numPizze" placeholder="Numero di pizze">
+                    <input type="number" id="pesoPizza" placeholder="Peso per pizza (g)">
+                    <button onclick="calcolaImpasto()">Calcola</button>
+                    <div id="result"></div>
+                </div>
+            </section>
+        </main>
+
+        <aside class="sidebar">
+            <div id="clock"></div>
+            <div id="calendar"></div>
+            <div id="quote"></div>
+        </aside>
+    </div>
+
+    <div id="modalLogin" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Accedi</h2>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <button onclick="login()">Accedi</button>
+        </div>
+    </div>
+
+    <div id="modalRegister" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Registrati</h2>
