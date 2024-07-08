@@ -6,7 +6,7 @@
     <title>La Famiglia Pizza di TikTok</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;700&display=swap');
 
         :root {
             --primary-color: #FFD54F;
@@ -16,7 +16,7 @@
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Lora', serif;
             background-color: var(--background-color);
             color: var(--text-color);
             line-height: 1.6;
@@ -26,15 +26,30 @@
 
         .container {
             display: flex;
+            flex-direction: column;
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
 
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row;
+            }
+        }
+
         .main-content {
             flex: 3;
-            margin-right: 20px;
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .main-content {
+                margin-right: 20px;
+                margin-bottom: 0;
+            }
         }
 
         .sidebar {
@@ -53,11 +68,18 @@
 
         .header-content {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
         }
 
         .logo {
@@ -70,6 +92,13 @@
             align-items: center;
             font-size: 48px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .logo {
+                margin-bottom: 0;
+            }
         }
 
         h1, h2, h3 {
@@ -80,6 +109,8 @@
         nav {
             background-color: var(--secondary-color);
             padding: 10px 0;
+            overflow-x: auto;
+            white-space: nowrap;
         }
 
         nav ul {
@@ -100,6 +131,8 @@
             color: #FFF;
             font-weight: bold;
             transition: color 0.3s ease;
+            padding: 10px 0;
+            display: inline-block;
         }
 
         nav ul li a:hover {
@@ -216,7 +249,7 @@
             background-color: #FF8F00;
         }
 
-        #visitor-counter, #quote-box {
+        #visitor-counter, #quote-box, #clock, #calendar {
             background-color: #FFF;
             padding: 15px;
             border-radius: 8px;
@@ -240,8 +273,13 @@
             margin-top: 10px;
         }
 
-        /* Modal styles */
+        #clock, #calendar {
+            text-align: center;
+            font-size: 1.2em;
+        }
+
         .modal-content {
+            display: none;
             position: fixed;
             top: 50%;
             left: 50%;
@@ -251,6 +289,8 @@
             border-radius: 8px;
             box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
             z-index: 1000;
+            width: 90%;
+            max-width: 500px;
         }
 
         .close {
@@ -264,6 +304,29 @@
 
         .modal-body {
             padding: 20px;
+        }
+
+        .modal-body textarea, .modal-body input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .modal-body button {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--secondary-color);
+            color: #FFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .modal-body button:hover {
+            background-color: #FF8F00;
         }
     </style>
 </head>
@@ -301,8 +364,17 @@
                 <a href="#ricette">Ricette</a>
                 <div class="submenu">
                     <a href="#margherita">Margherita</a>
-                    <a href="#pepperoni">Pepperoni</a>
-                    <a href="#vegetariana">Vegetariana</a>
+                    <a href="#cosacca">Cosacca</a>
+                    <a href="#marinara">Marinara</a>
+                    <a href="#napoletana">Napoletana</a>
+                </div>
+            </li>
+            <li>
+                <a href="#veraci">Veraci</a>
+                <div class="submenu">
+                    <a href="#verace-margherita">Verace Margherita</a>
+                    <a href="#verace-marinara">Verace Marinara</a>
+                    <a href="#verace-napoletana">Verace Napoletana</a>
                 </div>
             </li>
             <li>
@@ -322,260 +394,30 @@
         <div class="main-content">
             <section id="preparazione" class="section">
                 <h2>Preparazione</h2>
-                <p>La preparazione della pizza è un'arte che richiede pazienza e precisione...</p>
                 <div id="impasto">
                     <h3>Impasto</h3>
-                    <p>Il segreto di una buona pizza sta nell'impasto...</p>
+                    <p>L'impasto è il cuore della pizza. Per un impasto perfetto, utilizzate farina di tipo 00 o 0, acqua, sale, e un pizzico di lievito. Impastate fino ad ottenere una consistenza liscia ed elastica.</p>
                 </div>
                 <div id="lievitazione">
                     <h3>Lievitazione</h3>
-                    <p>La lievitazione è un processo cruciale per ottenere una pizza soffice...</p>
+                    <p>La lievitazione è fondamentale per una pizza leggera e digeribile. Lasciate lievitare l'impasto per almeno 8-12 ore a temperatura ambiente, o fino a 24-48 ore in frigorifero per una lievitazione lenta.</p>
                 </div>
                 <div id="cottura">
                     <h3>Cottura</h3>
-                    <p>La cottura deve essere fatta ad alte temperature...</p>
+                    <p>Per una cottura ottimale, preriscaldate il forno alla massima temperatura (idealmente 450-500°C). Utilizzate una pietra refrattaria o una teglia preriscaldata. La pizza dovrebbe cuocere in 60-90 secondi per le veraci, o 3-5 minuti per le pizze casalinghe.</p>
                 </div>
             </section>
 
             <section id="consigli" class="section">
                 <h2>Consigli</h2>
-                <p>Ecco alcuni consigli per migliorare la tua pizza...</p>
                 <div id="farina">
                     <h3>Scelta della Farina</h3>
-                    <p>La farina giusta fa la differenza...</p>
+                    <p>Per le pizze napoletane e veraci, utilizzate farina di tipo 00 ad alto contenuto proteico (W300-320). Per le pizze in teglia o da fare in casa, una farina di tipo 0 o 00 con W220-240 andrà benissimo.</p>
                 </div>
                 <div id="temperature">
                     <h3>Temperature</h3>
-                    <p>Le temperature giuste per ogni fase della preparazione...</p>
+                    <p>La temperatura dell'acqua nell'impasto dovrebbe essere intorno ai 20-22°C. Per la lievitazione, mantenete una temperatura costante di 24-26°C. In cottura, puntate alla massima temperatura del vostro forno.</p>
                 </div>
                 <div id="ingredienti">
                     <h3>Ingredienti</h3>
-                    <p>Ingredienti di qualità sono fondamentali...</p>
-                </div>
-            </section>
-
-            <section id="ricette" class="section">
-                <h2>Ricette</h2>
-                <p>Scopri le nostre ricette di pizza, dalle classiche alle gourmet...</p>
-                <div id="margherita">
-                    <h3>Margherita</h3>
-                    <p>Ingredienti e preparazione della classica pizza Margherita...</p>
-                </div>
-                <div id="pepperoni">
-                    <h3>Pepperoni</h3>
-                    <p>Ingredienti e preparazione della pizza Pepperoni...</p>
-                </div>
-                <div id="vegetariana">
-                    <h3>Vegetariana</h3>
-                    <p>Ingredienti e preparazione della pizza Vegetariana...</p>
-                </div>
-            </section>
-
-            <section id="calcolatore" class="section">
-                <h2>Calcolatore degli Ingredienti</h2>
-                <div id="calculator">
-                    <h3>Calcolatore della Pizza</h3>
-                    <form id="pizzaForm">
-                        <label for="pizzaType">Tipo di Pizza:</label>
-                        <select id="pizzaType" name="pizzaType">
-                            <option value="margherita">Margherita</option>
-                            <option value="pepperoni">Pepperoni</option>
-                            <option value="vegetariana">Vegetariana</option>
-                            <option value="verace">Verace</option>
-                            <option value="teglia">Teglia</option>
-                            <option value="pala">Pala</option>
-                            <option value="calzone">Calzone Ripieno</option>
-                            <option value="panuozzo">Panuozzo</option>
-                            <option value="fritta">Pizza Fritta</option>
-                        </select>
-
-                        <label for="numPizzas">Numero di Pizze:</label>
-                        <input type="number" id="numPizzas" name="numPizzas" min="1" max="10" value="1">
-
-                        <label for="hydration">Percentuale di Idratazione (%):</label>
-                        <input type="number" id="hydration" name="hydration" min="50" max="100" value="60">
-
-                        <button type="button" onclick="calculateIngredients()">Calcola Ingredienti</button>
-                    </form>
-
-                    <div id="result"></div>
-                </div>
-            </section>
-
-            <section id="contattaci" class="section">
-                <h2>Contattaci</h2>
-                <p>Per qualsiasi domanda, non esitare a contattarci tramite il modulo sottostante...</p>
-                <div id="visitor-counter">Numero di visitatori: <span id="visitorCount">0</span></div>
-                <div id="quote-box">
-                    <p>"La pizza è l'arte della felicità." <span class="author">- Autore sconosciuto</span></p>
-                </div>
-            </section>
-        </div>
-        
-        <aside class="sidebar">
-            <h3>Utente Autenticato</h3>
-            <div class="auth-form">
-                <input type="text" id="username" placeholder="Nome Utente">
-                <input type="password" id="password" placeholder="Password">
-                <button onclick="login()">Accedi</button>
-            </div>
-        </aside>
-    </div>
-
-    <!-- Modal structure -->
-    <div id="askQuestion" class="modal-content" style="display:none;">
-        <span class="close" onclick="closeModal('askQuestion')">&times;</span>
-        <div class="modal-body">
-            <h3>Fai una domanda</h3>
-            <textarea id="question" rows="5" placeholder="Scrivi qui la tua domanda..."></textarea>
-            <button onclick="submitQuestion()">Invia</button>
-        </div>
-    </div>
-
-    <div id="shareExperience" class="modal-content" style="display:none;">
-        <span class="close" onclick="closeModal('shareExperience')">&times;</span>
-        <div class="modal-body">
-            <h3>Condividi la tua esperienza</h3>
-            <textarea id="experience" rows="5" placeholder="Condividi la tua esperienza..."></textarea>
-            <button onclick="submitExperience()">Invia</button>
-        </div>
-    </div>
-
-    <div id="askAdvice" class="modal-content" style="display:none;">
-        <span class="close" onclick="closeModal('askAdvice')">&times;</span>
-        <div class="modal-body">
-            <h3>Chiedi un consiglio</h3>
-            <textarea id="advice" rows="5" placeholder="Scrivi qui la tua richiesta di consiglio..."></textarea>
-            <button onclick="submitAdvice()">Invia</button>
-        </div>
-    </div>
-
-    <div id="shareTip" class="modal-content" style="display:none;">
-        <span class="close" onclick="closeModal('shareTip')">&times;</span>
-        <div class="modal-body">
-            <h3>Condividi un suggerimento</h3>
-            <textarea id="tip" rows="5" placeholder="Scrivi qui il tuo suggerimento..."></textarea>
-            <button onclick="submitTip()">Invia</button>
-        </div>
-    </div>
-
-    <div id="login" class="modal-content" style="display:none;">
-        <span class="close" onclick="closeModal('login')">&times;</span>
-        <div class="modal-body">
-            <h3>Accedi</h3>
-            <input type="text" id="loginUsername" placeholder="Nome Utente">
-            <input type="password" id="loginPassword" placeholder="Password">
-            <button onclick="performLogin()">Accedi</button>
-        </div>
-    </div>
-
-    <div id="register" class="modal-content" style="display:none;">
-        <span class="close" onclick="closeModal('register')">&times;</span>
-        <div class="modal-body">
-            <h3>Registrati</h3>
-            <input type="text" id="registerUsername" placeholder="Nome Utente">
-            <input type="password" id="registerPassword" placeholder="Password">
-            <button onclick="performRegister()">Registrati</button>
-        </div>
-    </div>
-
-    <script>
-        function calculateIngredients() {
-            const pizzaType = document.getElementById('pizzaType').value;
-            const numPizzas = document.getElementById('numPizzas').value;
-            const hydration = document.getElementById('hydration').value;
-            let result = '';
-
-            let flour = numPizzas * 100;
-            let water = (hydration / 100) * flour;
-            let yeast = numPizzas * 10;
-            let salt = numPizzas * 5;
-            let oil = numPizzas * 10;
-
-            switch (pizzaType) {
-                case 'verace':
-                    yeast *= 0.5;
-                    oil *= 0.5;
-                    break;
-                case 'teglia':
-                    water *= 1.1;
-                    break;
-                case 'pala':
-                    water *= 1.2;
-                    break;
-                case 'calzone':
-                    flour *= 1.2;
-                    break;
-                case 'panuozzo':
-                    flour *= 0.8;
-                    break;
-                case 'fritta':
-                    oil *= 1.5;
-                    break;
-            }
-
-            result += `<p>Farina: ${flour.toFixed(2)} g</p>`;
-            result += `<p>Acqua: ${water.toFixed(2)} ml</p>`;
-            result += `<p>Lievito: ${yeast.toFixed(2)} g</p>`;
-            result += `<p>Sale: ${salt.toFixed(2)} g</p>`;
-            result += `<p>Olio: ${oil.toFixed(2)} ml</p>`;
-
-            document.getElementById('result').innerHTML = result;
-        }
-
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = 'block';
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-        function submitQuestion() {
-            const question = document.getElementById('question').value;
-            alert('Domanda inviata con successo!'); // Simulazione invio domanda
-            closeModal('askQuestion');
-        }
-
-        function submitExperience() {
-            const experience = document.getElementById('experience').value;
-            alert('Esperienza condivisa con successo!'); // Simulazione invio esperienza
-            closeModal('shareExperience');
-        }
-
-        function submitAdvice() {
-            const advice = document.getElementById('advice').value;
-            alert('Consiglio inviato con successo!'); // Simulazione invio consiglio
-            closeModal('askAdvice');
-        }
-
-        function submitTip() {
-            const tip = document.getElementById('tip').value;
-            alert('Suggerimento condiviso con successo!'); // Simulazione invio suggerimento
-            closeModal('shareTip');
-        }
-
-        function performLogin() {
-            const username = document.getElementById('loginUsername').value;
-            const password = document.getElementById('loginPassword').value;
-            alert('Accesso effettuato con successo!'); // Simulazione accesso
-            closeModal('login');
-        }
-
-        function performRegister() {
-            const username = document.getElementById('registerUsername').value;
-            const password = document.getElementById('registerPassword').value;
-            alert('Registrazione effettuata con successo!'); // Simulazione registrazione
-            closeModal('register');
-        }
-
-        // Simulazione contatore visitatori
-        let visitorCount = 0;
-        setInterval(() => {
-            visitorCount++;
-            document.getElementById('visitorCount').innerText = visitorCount;
-        }, 5000); // Incrementa il contatore ogni 5 secondi
-    </script>
-</body>
-</html>
-
+                    <p
