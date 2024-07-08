@@ -6,44 +6,37 @@
     <title>La Famiglia Pizza</title>
     <style>
         body {
-            font-family: 'Georgia', serif; /* Font elegante */
-            background-color: #f4f4f4;
+            font-family: 'Garamond', serif;
+            background: url('logo_pizza.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: #333;
-        }
-        .container {
-            display: flex;
-            justify-content: space-between;
-            margin: 20px;
-        }
-        .main-content {
-            width: 75%;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .sidebar {
-            width: 20%;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        nav ul {
-            list-style-type: none;
+            margin: 0;
             padding: 0;
         }
-        nav ul li {
-            margin: 10px 0;
+        .header, .sidebar, .content, .footer {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            margin: 10px;
         }
-        nav ul li a {
-            text-decoration: none;
-            color: #333;
+        .header {
+            text-align: center;
         }
-        .submenu a {
-            display: block;
-            margin-left: 20px;
+        .header h1 {
+            font-size: 2.5em;
+            color: #d2691e;
         }
-        .section {
-            margin-bottom: 20px;
+        .sidebar {
+            width: 25%;
+            float: left;
+        }
+        .content {
+            width: 70%;
+            float: right;
+        }
+        .footer {
+            clear: both;
+            text-align: center;
         }
         .modal-content {
             display: none;
@@ -51,15 +44,12 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: #fff;
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
-        .modal-body {
-            margin-top: 10px;
-        }
-        .close {
+        .modal-content .close {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -68,158 +58,53 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>La Famiglia Pizza</h1>
-    </header>
-    <nav>
+    <div class="header">
+        <h1>La Famiglia Pizza di TikTok</h1>
+    </div>
+
+    <div class="sidebar">
+        <h2>Menu</h2>
         <ul>
-            <li>
-                <a href="#preparazione">Preparazione</a>
-                <div class="submenu">
-                    <a href="#impasto">Impasto</a>
-                    <a href="#lievitazione">Lievitazione</a>
-                    <a href="#cottura">Cottura</a>
-                </div>
-            </li>
-            <li>
-                <a href="#consigli">Consigli</a>
-                <div class="submenu">
-                    <a href="#farina">Scelta della Farina</a>
-                    <a href="#temperature">Temperature</a>
-                    <a href="#ingredienti">Ingredienti</a>
-                </div>
-            </li>
-            <li>
-                <a href="#ricette">Ricette</a>
-                <div class="submenu">
-                    <a href="#margherita">Margherita</a>
-                    <a href="#cosacca">Cosacca</a>
-                    <a href="#marinara">Marinara</a>
-                    <a href="#napoletana">Napoletana</a>
-                </div>
-            </li>
-            <li>
-                <a href="#calcolatore">Calcolatore</a>
-            </li>
-            <li>
-                <a href="#contattaci">Contattaci</a>
-                <div class="submenu">
-                    <a href="#" onclick="openModal('login')">Accedi</a>
-                    <a href="#" onclick="openModal('register')">Registrati</a>
-                </div>
-            </li>
+            <li><a href="#margherita">Margherita</a></li>
+            <li><a href="#cosacca">Cosacca</a></li>
+            <li><a href="#marinara">Marinara</a></li>
+            <li><a href="#napoletana">Napoletana</a></li>
         </ul>
-    </nav>
 
-    <div class="container">
-        <div class="main-content">
-            <section id="preparazione" class="section">
-                <h2>Preparazione</h2>
-                <p>La preparazione della pizza è un'arte che richiede pazienza e precisione...</p>
-                <div id="impasto">
-                    <h3>Impasto</h3>
-                    <p>Il segreto di una buona pizza sta nell'impasto...</p>
-                </div>
-                <div id="lievitazione">
-                    <h3>Lievitazione</h3>
-                    <p>La lievitazione è un processo cruciale per ottenere una pizza soffice...</p>
-                </div>
-                <div id="cottura">
-                    <h3>Cottura</h3>
-                    <p>La cottura deve essere fatta ad alte temperature...</p>
-                </div>
-            </section>
+        <h3>Cita un amico:</h3>
+        <button onclick="openModal('askQuestion')">Fai una domanda</button>
+        <button onclick="openModal('shareExperience')">Condividi un'esperienza</button>
+        <button onclick="openModal('askAdvice')">Chiedi un consiglio</button>
+        <button onclick="openModal('shareTip')">Condividi un suggerimento</button>
+        
+        <div id="calendar"></div>
+        <div id="clock"></div>
+    </div>
 
-            <section id="consigli" class="section">
-                <h2>Consigli</h2>
-                <p>Ecco alcuni consigli per migliorare la tua pizza...</p>
-                <div id="farina">
-                    <h3>Scelta della Farina</h3>
-                    <p>La farina giusta fa la differenza...</p>
-                </div>
-                <div id="temperature">
-                    <h3>Temperature</h3>
-                    <p>Le temperature giuste per ogni fase della preparazione...</p>
-                </div>
-                <div id="ingredienti">
-                    <h3>Ingredienti</h3>
-                    <p>Ingredienti di qualità sono fondamentali...</p>
-                </div>
-            </section>
+    <div class="content">
+        <h2>Calcolatore Pizza</h2>
+        <label for="pizzaType">Tipo di Pizza:</label>
+        <select id="pizzaType">
+            <option value="verace">Verace Napoletana</option>
+            <option value="teglia">Teglia</option>
+            <option value="pala">Pala</option>
+            <option value="calzone">Calzone Farcito</option>
+            <option value="panuozzo">Panuozzo</option>
+            <option value="fritta">Fritta</option>
+        </select>
+        <label for="numPizzas">Numero di Pizze:</label>
+        <input type="number" id="numPizzas" value="1" min="1">
+        <label for="hydration">Percentuale di Idratazione (%):</label>
+        <input type="number" id="hydration" value="60" min="50" max="100">
+        <label for="temperature">Temperatura di Cottura (°C):</label>
+        <input type="number" id="temperature" value="250" min="200" max="500">
+        <button onclick="calculateIngredients()">Calcola Ingredienti</button>
 
-            <section id="ricette" class="section">
-                <h2>Ricette</h2>
-                <p>Scopri le nostre ricette di pizza, dalle classiche alle gourmet...</p>
-                <div id="margherita">
-                    <h3>Margherita</h3>
-                    <p>Ingredienti e preparazione della classica pizza Margherita...</p>
-                </div>
-                <div id="cosacca">
-                    <h3>Cosacca</h3>
-                    <p>Ingredienti e preparazione della pizza Cosacca...</p>
-                </div>
-                <div id="marinara">
-                    <h3>Marinara</h3>
-                    <p>Ingredienti e preparazione della pizza Marinara...</p>
-                </div>
-                <div id="napoletana">
-                    <h3>Napoletana</h3>
-                    <p>Ingredienti e preparazione della pizza Napoletana...</p>
-                </div>
-            </section>
+        <div id="result"></div>
+    </div>
 
-            <section id="calcolatore" class="section">
-                <h2>Calcolatore degli Ingredienti</h2>
-                <div id="calculator">
-                    <h3>Calcolatore della Pizza</h3>
-                    <form id="pizzaForm">
-                        <label for="pizzaType">Tipo di Pizza:</label>
-                        <select id="pizzaType" name="pizzaType">
-                            <option value="margherita">Margherita</option>
-                            <option value="cosacca">Cosacca</option>
-                            <option value="marinara">Marinara</option>
-                            <option value="napoletana">Napoletana</option>
-                            <option value="verace">Verace</option>
-                            <option value="teglia">Teglia</option>
-                            <option value="pala">Pala</option>
-                            <option value="calzone">Calzone Ripieno</option>
-                            <option value="panuozzo">Panuozzo</option>
-                            <option value="fritta">Pizza Fritta</option>
-                        </select>
-
-                        <label for="numPizzas">Numero di Pizze:</label>
-                        <input type="number" id="numPizzas" name="numPizzas" min="1" max="10" value="1">
-
-                        <label for="hydration">Percentuale di Idratazione (%):</label>
-                        <input type="number" id="hydration" name="hydration" min="50" max="100" value="60">
-
-                        <button type="button" onclick="calculateIngredients()">Calcola Ingredienti</button>
-                    </form>
-
-                    <div id="result"></div>
-                </div>
-            </section>
-
-            <section id="contattaci" class="section">
-                <h2>Contattaci</h2>
-                <p>Per qualsiasi domanda, non esitare a contattarci tramite il modulo sottostante...</p>
-                <p>Seguici su TikTok: @lafamigliapizzaditiktok</p>
-                <div id="visitor-counter">Numero di visitatori: <span id="visitorCount">0</span></div>
-                <div id="quote-box">
-                    <p>"La pizza è l'arte della felicità." <span class="author">- Autore sconosciuto</span></p>
-                </div>
-            </section>
-        </div>
-
-        <div class="sidebar">
-            <h3>Cita un amico:</h3>
-            <button onclick="openModal('askQuestion')">Fai una domanda</button>
-            <button onclick="openModal('shareExperience')">Condividi un'esperienza</button>
-            <button onclick="openModal('askAdvice')">Chiedi un consiglio</button>
-            <button onclick="openModal('shareTip')">Condividi un suggerimento</button>
-            <div id="calendar"></div>
-            <div id="clock"></div>
-        </div>
+    <div class="footer">
+        <p>Contattaci su TikTok: @lafamigliapizzaditiktok</p>
     </div>
 
     <div id="askQuestion" class="modal-content">
@@ -291,6 +176,7 @@
             const pizzaType = document.getElementById('pizzaType').value;
             const numPizzas = parseInt(document.getElementById('numPizzas').value);
             const hydration = parseFloat(document.getElementById('hydration').value);
+            const temperature = parseInt(document.getElementById('temperature').value);
 
             let flour = 1000 * numPizzas;
             let water = (hydration / 100) * flour;
@@ -326,6 +212,7 @@
             result += `<p>Lievito: ${yeast.toFixed(2)} g</p>`;
             result += `<p>Sale: ${salt.toFixed(2)} g</p>`;
             result += `<p>Olio: ${oil.toFixed(2)} ml</p>`;
+            result += `<p>Temperatura di Cottura: ${temperature} °C</p>`;
 
             document.getElementById('result').innerHTML = result;
         }
@@ -339,73 +226,49 @@
         }
 
         function submitQuestion() {
-            const question = document.getElementById('question').value;
-            alert('Domanda inviata con successo!'); // Simulazione invio domanda
-            closeModal('askQuestion');
+            // implement question submission
         }
 
         function submitExperience() {
-            const experience = document.getElementById('experience').value;
-            alert('Esperienza condivisa con successo!'); // Simulazione invio esperienza
-            closeModal('shareExperience');
+            // implement experience submission
         }
 
         function submitAdvice() {
-            const advice = document.getElementById('advice').value;
-            alert('Consiglio inviato con successo!'); // Simulazione invio consiglio
-            closeModal('askAdvice');
+            // implement advice submission
         }
 
         function submitTip() {
-            const tip = document.getElementById('tip').value;
-            alert('Suggerimento condiviso con successo!'); // Simulazione invio suggerimento
-            closeModal('shareTip');
+            // implement tip submission
         }
 
         function performLogin() {
-            const username = document.getElementById('loginUsername').value;
-            const password = document.getElementById('loginPassword').value;
-            alert('Accesso effettuato con successo!'); // Simulazione accesso
-            closeModal('login');
+            // implement login functionality
         }
 
         function performRegister() {
-            const username = document.getElementById('registerUsername').value;
-            const password = document.getElementById('registerPassword').value;
-            alert('Registrazione effettuata con successo!'); // Simulazione registrazione
-            closeModal('register');
+            // implement registration functionality
         }
 
-        // Simulazione contatore visitatori
-        let visitorCount = 0;
-        setInterval(() => {
-            visitorCount++;
-            document.getElementById('visitorCount').innerText = visitorCount;
-        }, 5000); // Incrementa il contatore ogni 5 secondi
-
-        // Funzione per aggiornare il calendario e l'orologio
-        function updateClockAndCalendar() {
+        function updateClock() {
             const now = new Date();
-            const days = ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'];
-            const months = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
-
-            const day = days[now.getDay()];
-            const date = now.getDate();
-            const month = months[now.getMonth()];
-            const year = now.getFullYear();
-
             const hours = now.getHours().toString().padStart(2, '0');
             const minutes = now.getMinutes().toString().padStart(2, '0');
             const seconds = now.getSeconds().toString().padStart(2, '0');
-
-            const calendarString = `${day}, ${date} ${month} ${year}`;
-            const clockString = `${hours}:${minutes}:${seconds}`;
-
-            document.getElementById('calendar').innerText = calendarString;
-            document.getElementById('clock').innerText = clockString;
+            const timeString = `${hours}:${minutes}:${seconds}`;
+            document.getElementById('clock').innerHTML = timeString;
         }
 
-        setInterval(updateClockAndCalendar, 1000); // Aggiorna ogni secondo
+        function updateCalendar() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateString = now.toLocaleDateString('it-IT', options);
+            document.getElementById('calendar').innerHTML = dateString;
+        }
+
+        setInterval(updateClock, 1000);
+        setInterval(updateCalendar, 60000);
+        updateClock();
+        updateCalendar();
     </script>
 </body>
 </html>
