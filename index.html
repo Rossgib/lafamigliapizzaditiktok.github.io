@@ -3,303 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="La Famiglia Pizza di TikTok - Impara l'arte della pizza napoletana">
     <title>La Famiglia Pizza di TikTok</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;700&display=swap');
-
-        :root {
-            --primary-color: #FFD54F;
-            --secondary-color: #FFA000;
-            --background-color: #FFF8E1;
-            --text-color: #4A4A4A;
-            --accent-color: #FF6F00;
-        }
-
-        * {
-            box-sizing: border-box;
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
-
-        body {
-            font-family: 'Lora', serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background-image: url('pizza-background.jpg');
-            background-size: cover;
-            background-attachment: fixed;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-        }
-
         header {
-            background-color: var(--primary-color);
+            background-color: #ff6347;
+            color: white;
             padding: 20px 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            text-align: center;
         }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo img {
-            width: 80px;
-            height: 80px;
-        }
-
-        .logo h1 {
-            font-family: 'Playfair Display', serif;
-            color: var(--secondary-color);
-            margin-left: 10px;
-        }
-
         nav {
-            background-color: var(--secondary-color);
-            padding: 10px 0;
+            background-color: #333;
         }
-
         nav ul {
             list-style-type: none;
+            padding: 0;
+            margin: 0;
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
         }
-
         nav ul li {
             position: relative;
-            margin: 0 15px;
         }
-
         nav ul li a {
+            color: white;
+            padding: 14px 20px;
+            display: block;
             text-decoration: none;
-            color: #FFF;
-            font-weight: bold;
-            transition: color 0.3s ease;
-            padding: 10px 0;
-            display: inline-block;
         }
-
-        nav ul li a:hover {
-            color: var(--primary-color);
+        nav ul li a:hover,
+        nav ul li a:focus {
+            background-color: #555;
         }
-
         .submenu {
             display: none;
             position: absolute;
-            background-color: #FFF;
+            background-color: #333;
+            top: 100%;
+            left: 0;
             min-width: 200px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            z-index: 1;
         }
-
+        .submenu a {
+            padding: 12px 16px;
+        }
         nav ul li:hover .submenu {
             display: block;
         }
-
-        .submenu a {
-            color: var(--text-color);
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .submenu a:hover {
-            background-color: var(--primary-color);
-        }
-
-        main {
+        .container {
             display: flex;
-            flex: 1;
-            padding: 20px;
+            margin: 20px;
         }
-
         .sidebar {
-            width: 250px;
-            padding: 20px;
-            background-color: #FFF;
-            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-            margin-right: 20px;
-            flex-shrink: 0;
-        }
-
-        .section {
-            background-color: #FFF;
-            margin: 20px 0;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
             flex: 1;
-        }
-
-        #calculator {
-            background-color: var(--primary-color);
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background-color: #f4f4f4;
         }
-
-        #calculator h3 {
-            color: var(--text-color);
-            margin-bottom: 15px;
-        }
-
-        #calculator select, #calculator input, #calculator button {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-        #calculator select, #calculator input {
-            background-color: #FFF;
-            color: var(--text-color);
-        }
-
-        #calculator button {
-            background-color: var(--secondary-color);
-            color: #FFF;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-weight: bold;
-        }
-
-        #calculator button:hover {
-            background-color: var(--accent-color);
-        }
-
-        #result {
-            margin-top: 20px;
-            font-weight: bold;
-            background-color: #FFF;
-            padding: 15px;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
+        .section {
+            flex: 3;
             padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-left: 20px;
         }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        #clock, #calendar, #quote {
-            font-size: 1.2em;
-            text-align: center;
-            margin-top: 20px;
-            background-color: #FFF;
-            padding: 10px;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
         footer {
-            background-color: var(--secondary-color);
-            color: #FFF;
+            background-color: #333;
+            color: white;
             text-align: center;
             padding: 10px 0;
-            margin-top: auto;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
         }
-
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-
-            .sidebar {
-                width: 100%;
-                order: -1;
-                margin-right: 0;
-            }
-
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .logo {
-                margin-bottom: 20px;
-            }
-
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            nav ul li {
-                margin: 10px 0;
-            }
-
-            .submenu {
-                position: static;
-                display: none;
-                width: 100%;
-            }
-
-            nav ul li:hover .submenu {
-                display: block;
-            }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo-container img {
+            max-width: 200px;
+        }
+        .logo-container p {
+            font-size: 1.2em;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">
-            <img src="pizza-logo.png" alt="Pizza Logo">
-            <h1>La Famiglia Pizza di TikTok</h1>
+        <div class="logo-container">
+            <img src="path_to_logo.png" alt="Logo della Famiglia Pizza di TikTok">
+            <p>La Famiglia Pizza di TikTok</p>
         </div>
+        <h1>La Famiglia Pizza di TikTok</h1>
     </header>
-    
     <nav>
         <ul>
             <li>
@@ -313,13 +110,13 @@
             <li>
                 <a href="#consigli">Consigli</a>
                 <div class="submenu">
-                    <a href="#farina">Scelta della farina</a>
+                    <a href="#farina">Farina</a>
                     <a href="#temperature">Temperature</a>
                     <a href="#ingredienti">Ingredienti</a>
                 </div>
             </li>
             <li>
-                <a href="#ricette">Ricette</a>
+                <a href="#pizze">Pizze</a>
                 <div class="submenu">
                     <a href="#margherita">Margherita</a>
                     <a href="#cosacca">Cosacca</a>
@@ -400,54 +197,53 @@
                     </select>
                     <input type="number" id="numPizze" placeholder="Numero di pizze">
                     <input type="number" id="pesoPizza" placeholder="Peso per pizza (g)">
+                    <input type="number" id="tempAmbiente" placeholder="Temperatura ambiente (°C)">
+                    <input type="number" id="idratazione" placeholder="Idratazione (%)">
                     <button onclick="calcolaImpasto()">Calcola</button>
                     <div id="result"></div>
+                </div>
+            </section>
+
+            <section id="pizze" class="section">
+                <h2>Pizze</h2>
+                <div id="margherita">
+                    <h3>Margherita</h3>
+                    <p>La pizza Margherita è un classico intramontabile. Pomodoro, mozzarella, basilico, e un filo d'olio d'oliva. Semplice e deliziosa.</p>
+                </div>
+                <div id="cosacca">
+                    <h3>Cosacca</h3>
+                    <p>Una variante della Margherita con aggiunta di pecorino romano grattugiato, che conferisce un sapore deciso e unico.</p>
+                </div>
+                <div id="marinara">
+                    <h3>Marinara</h3>
+                    <p>La pizza Marinara è condita con pomodoro, aglio, origano, e olio d'oliva. Senza formaggio, è una scelta leggera e saporita.</p>
+                </div>
+                <div id="napoletana">
+                    <h3>Napoletana</h3>
+                    <p>La pizza Napoletana originale, con pomodoro, mozzarella di bufala, basilico, e olio d'oliva. Un'icona della tradizione partenopea.</p>
+                </div>
+            </section>
+
+            <section id="veraci" class="section">
+                <h2>Pizze Veraci</h2>
+                <div id="verace-margherita">
+                    <h3>Verace Margherita</h3>
+                    <p>La Verace Margherita è preparata secondo i rigorosi standard dell'Associazione Verace Pizza Napoletana, con ingredienti DOP e un procedimento tradizionale.</p>
+                </div>
+                <div id="verace-marinara">
+                    <h3>Verace Marinara</h3>
+                    <p>La Verace Marinara, semplice e autentica, con pomodoro, aglio, origano, e olio extravergine d'oliva di alta qualità.</p>
+                </div>
+                <div id="verace-napoletana">
+                    <h3>Verace Napoletana</h3>
+                    <p>La Verace Napoletana con mozzarella di bufala campana DOP, pomodoro San Marzano DOP, e basilico fresco, cotta in forno a legna.</p>
                 </div>
             </section>
         </main>
     </div>
 
-    <div id="modalLogin" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Accedi</h2>
-            <input type="email" placeholder="Email" required>
-            <input type="password" placeholder="Password" required>
-            <button onclick="login()">Accedi</button>
-        </div>
-    </div>
-
-    <div id="modalRegister" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Registrati</h2>
-            <input type="text" placeholder="Nome" required>
-            <input type="email" placeholder="Email" required>
-            <input type="password" placeholder="Password" required>
-            <button onclick="register()">Registrati</button>
-        </div>
-    </div>
-
-    <div id="modalAskQuestion" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Fai una domanda</h2>
-            <textarea placeholder="Scrivi la tua domanda qui..." required></textarea>
-            <button onclick="submitQuestion()">Invia</button>
-        </div>
-    </div>
-
-    <div id="modalShareExperience" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Condividi esperienza</h2>
-            <textarea placeholder="Condividi la tua esperienza qui..." required></textarea>
-            <button onclick="shareExperience()">Condividi</button>
-        </div>
-    </div>
-
     <footer>
-        <p>&copy; 2024 La Famiglia Pizza di TikTok. Tutti i diritti riservati.</p>
+        <p>&copy; 2024 La Famiglia Pizza di TikTok</p>
     </footer>
 
     <script>
@@ -455,48 +251,22 @@
             var pizzaType = document.getElementById('pizzaType').value;
             var numPizze = document.getElementById('numPizze').value;
             var pesoPizza = document.getElementById('pesoPizza').value;
-            
-            if (!numPizze || !pesoPizza) {
-                document.getElementById('result').innerText = "Per favore, inserisci tutti i campi.";
-                return;
-            }
+            var tempAmbiente = document.getElementById('tempAmbiente').value;
+            var idratazione = document.getElementById('idratazione').value;
 
-            var result = `Per fare ${numPizze} pizze di tipo ${pizzaType}, con un peso per pizza di ${pesoPizza}g, avrai bisogno di:`;
-            result += `\n\n- ${numPizze * pesoPizza * 0.6}g di farina\n- ${numPizze * pesoPizza * 0.35}ml di acqua\n- ${numPizze * pesoPizza * 0.02}g di sale\n- ${numPizze * pesoPizza * 0.01}g di lievito`;
+            // Esempio di calcolo (aggiusta le formule in base alle tue necessità)
+            var farina = numPizze * pesoPizza / (1 + (idratazione / 100));
+            var acqua = farina * (idratazione / 100);
+            var sale = farina * 0.02;
+            var lievito = farina * 0.01;
 
-            document.getElementById('result').innerText = result;
-        }
-
-        function openModal(modalId) {
-            document.getElementById('modal' + modalId.charAt(0).toUpperCase() + modalId.slice(1)).style.display = 'block';
-        }
-
-        document.querySelectorAll('.modal .close').forEach(closeBtn => {
-            closeBtn.addEventListener('click', () => {
-                closeBtn.closest('.modal').style.display = 'none';
-            });
-        });
-
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = 'none';
-            }
-        }
-
-        function login() {
-            alert('Funzione di login non implementata.');
-        }
-
-        function register() {
-            alert('Funzione di registrazione non implementata.');
-        }
-
-        function submitQuestion() {
-            alert('Funzione di invio domanda non implementata.');
-        }
-
-        function shareExperience() {
-            alert('Funzione di condivisione esperienza non implementata.');
+            document.getElementById('result').innerText =
+                `Farina: ${farina.toFixed(2)} g\n` +
+                `Acqua: ${acqua.toFixed(2)} g\n` +
+                `Sale: ${sale.toFixed(2)} g\n` +
+                `Lievito: ${lievito.toFixed(2)} g\n` +
+                `Temperatura Ambiente: ${tempAmbiente}°C\n` +
+                `Idratazione: ${idratazione}%`;
         }
 
         function updateTime() {
